@@ -1,0 +1,19 @@
+{
+  "name": "riant",
+  "version": "1.0.0-1",
+  "description": "Highly configurable development and build tools for react.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-hobby/riant.git"
+  },
+  "author": "Jesse Feng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/react-hobby/riant/issues"
+  },
+  "homepage": "https://github.com/react-hobby/riant#readme"
+}
