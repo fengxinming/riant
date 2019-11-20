@@ -1,5 +1,6 @@
 'use strict';
 
+const { EOL } = require('os');
 const { isAbsolute, join } = require('path');
 const { existsSync } = require('fs');
 const chalk = require('chalk');
@@ -12,6 +13,7 @@ const initChain = require('./init-chain');
 
 const logger = getLogger('Service');
 const { isArray } = Array;
+const { stringify } = JSON;
 
 class Service {
 
@@ -132,10 +134,8 @@ class Service {
     removeSlash(resolved, 'outputDir');
 
     // 验证参数
-    validate(resolved).catch((err) => {
-      logger.error(
-        `Invalid options in ${chalk.bold(resolvedFrom)}: ${err.errors.join('; ')}`
-      );
+    validate(resolved, (err) => {
+      logger.error(`Invalid options in ${chalk.bold(resolvedFrom)}:${EOL}${err.map(e => stringify(e, null, 2)).join(EOL)}`);
       process.exit(1);
     });
 

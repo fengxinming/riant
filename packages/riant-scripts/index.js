@@ -1,11 +1,13 @@
 'use strict';
 
+const { EOL } = require('os');
 const Service = require('./lib/Service');
 const { logWithSpinner, stopSpinner } = require('./lib/spinner');
 const pkg = require('./package.json');
 
 module.exports = function (command, options = {}) {
-  logWithSpinner(`${pkg.name} is running ...`);
+  logWithSpinner(`${pkg.name} is running ...${EOL}`);
+
   let plugins = [
     require('./lib/plugins/paths'),
     require('./lib/plugins/alias'),
@@ -31,6 +33,7 @@ module.exports = function (command, options = {}) {
   options.plugins = plugins;
 
   const service = new Service(options);
+
   stopSpinner(false);
   service.run(command);
 };

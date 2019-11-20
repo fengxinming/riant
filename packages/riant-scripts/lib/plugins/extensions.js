@@ -1,6 +1,7 @@
 'use strict';
 
-const { isFunction, isObject } = require('../utils');
+const { isFunction } = require('../utils');
+const { isArray } = Array;
 
 /**
  * 处理自定义配置 extensions
@@ -15,8 +16,10 @@ module.exports = function (service, projectOptions) {
 
     if (isFunction(extensions)) {
       extensions(chain.resolve.extensions, webpackEnv);
-    } else if (isObject(extensions)) {
-      chain.resolve.alias.merge(extensions);
+    } else if (isArray(extensions)) {
+      extensions.forEach((extenstion) => {
+        chain.resolve.extensions.add(extenstion);
+      });
     }
   });
 };

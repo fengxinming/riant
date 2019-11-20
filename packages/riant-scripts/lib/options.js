@@ -1,34 +1,54 @@
 'use strict';
 
-const yup = require('yup');
+const Ajv = require('ajv');
 
-const schema = yup.object().shape({
-  alias: yup.object(),
-  chainWebpack: yup.object(),
-  configureWebpack: yup.object(),
-  css: yup.object({
-    modules: yup.boolean(),
-    sourceMap: yup.boolean(),
-    loaderOptions: yup.object({
-      css: yup.object(),
-      sass: yup.object(),
-      scss: yup.object(),
-      less: yup.object(),
-      stylus: yup.object(),
-      postcss: yup.object()
-    })
-  }),
-  extensions: yup.array(),
-  externals: yup.object(),
-  devServer: yup.object(),
-  paths: yup.object()
+const ajv = new Ajv({
+  allErrors: true,
+  verbose: true,
+  $data: true
+});
+require('ajv-keywords')(ajv, ['instanceof']);
+
+const compiledSchema = ajv.compile({
+  title: 'RiantScriptsOptions',
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    alias: { instanceof: ['Function', 'Object'] },
+    chainWebpack: { instanceof: ['Function', 'Object'] },
+    configureWebpack: { instanceof: ['Function', 'Object'] },
+    css: {
+      type: 'object',
+      properties: {
+        modules: { type: 'boolean' },
+        sourceMap: { type: 'boolean' },
+        loaderOptions: {
+          type: 'object',
+          properties: {
+            css: { type: 'object' },
+            less: { type: 'object' },
+            stylus: { type: 'object' },
+            postcss: { type: 'object' }
+          }
+        }
+      }
+    },
+    extensions: {
+      oneOf: [
+        { type: 'array', items: { type: 'string' } },
+        { instanceof: 'Function' }
+      ]
+    },
+    externals: { instanceof: ['Function', 'Object'] },
+    devServer: { instanceof: ['Function', 'Object'] },
+    jest: { instanceof: ['Function', 'Object'] },
+    paths: { instanceof: ['Function', 'Object'] }
+  }
 });
 
-exports.validate = function (resolved) {
-  return schema.validate(resolved, {
-    strict: true,
-    stripUnknown: true
-  });
+exports.validate = function (resolved, cb) {
+  const valid = compiledSchema(resolved);
+  !valid && cb && cb(filterErrors(compiledSchema.errors));
 };
 
 exports.defaults = () => ({
@@ -53,3 +73,36 @@ exports.defaults = () => ({
   */
   }
 });
+
+function filterErrors(errors) {
+  let newErrors = [];
+
+  for (const error of errors) {
+    const { dataPath } = error;
+    let children = [];
+
+    newErrors = newErrors.filter((oldError) => {
+      if (oldError.dataPath.includes(dataPath)) {
+        if (oldError.children) {
+          children = children.concat(oldError.children.slice(0));
+        }
+
+        // eslint-disable-next-line no-undefined, no-param-reassign
+        oldError.children = undefined;
+        children.push(oldError);
+
+        return false;
+      }
+
+      return true;
+    });
+
+    if (children.length) {
+      error.children = children;
+    }
+
+    newErrors.push(error);
+  }
+
+  return newErrors;
+}
