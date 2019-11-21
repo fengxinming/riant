@@ -1,4 +1,6 @@
-// kyo
+process.stdout.isTTY = false;
+
+// riant
 module.exports = {
   jest(config) {
     return config;

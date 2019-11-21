@@ -151,11 +151,6 @@ class Service {
     // 优先执行链式回调
     this.webpackChainFns.forEach(fn => fn(chainableConfig, env));
 
-    // 合并 rules 时, 会出现合并而不是覆盖的情况
-    const moduleConfig = chainableConfig.module.toConfig();
-    webpackConfig.module = moduleConfig;
-    chainableConfig.module.rules.clear();
-
     // 获取未处理的 webpack 配置
     // 合并 chain webpack 后的配置
     let config = merge(webpackConfig, chainableConfig.toConfig());
@@ -169,6 +164,7 @@ class Service {
         config = merge(config, fn);
       }
     });
+    // console.log(require('util').inspect(config, { depth: Infinity }));
     return config;
   }
 
