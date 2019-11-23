@@ -11,16 +11,17 @@ module.exports = function (command, options = {}) {
   let plugins = [
     require('./lib/plugins/paths'),
     require('./lib/plugins/alias'),
+    require('./lib/plugins/babel-plugins'),
     require('./lib/plugins/css'),
     require('./lib/plugins/extensions'),
     require('./lib/plugins/externals'),
-    require('./lib/plugins/chainWebpack'),
-    require('./lib/plugins/configureWebpack')
+    require('./lib/plugins/chain-webpack'),
+    require('./lib/plugins/configure-webpack')
   ];
 
   switch (command) {
     case 'start':
-      plugins.push(require('./lib/plugins/devServer'));
+      plugins.push(require('./lib/plugins/dev-server'));
       break;
     case 'test':
       plugins.push(require('./lib/plugins/jest'));

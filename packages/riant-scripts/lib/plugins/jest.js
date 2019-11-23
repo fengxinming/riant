@@ -39,7 +39,7 @@ module.exports = function (service, projectOptions) {
   // 合并 jest 配置
   Object.keys(defaultJestConfig.transform).forEach((key) => {
     if (defaultJestConfig.transform[key].endsWith('babelTransform.js')) {
-      defaultJestConfig.transform[key] = join(__dirname, '..', '/utils/babelTransform.js');
+      defaultJestConfig.transform[key] = join(__dirname, '..', '/utils/babel-transform.js');
     }
   });
   const jestConfig = assign({}, jestFromPackage);

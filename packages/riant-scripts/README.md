@@ -9,6 +9,16 @@ $ npm install riant-scripts --save-dev
 
 ### 在根目录中创建一个 riant.config.js 文件
 
+/* riant.config.js */
+module.exports = {
+  alias: { 
+    '@': path.join(__dirname, 'src')
+  }
+}
+```
+
+### Schema
+
 ```javascript
 /* riant.config.js */
 module.exports = {
@@ -31,6 +41,7 @@ module.exports = {
       }
     }
   },
+  devServer: { instanceof: ['Function', 'Object'] },
   extensions: {
     oneOf: [
       { type: 'array', items: { type: 'string' } },
@@ -38,7 +49,7 @@ module.exports = {
     ]
   },
   externals: { instanceof: ['Function', 'Object'] },
-  devServer: { instanceof: ['Function', 'Object'] },
+  fixBabelImports: { instanceof: ['Array', 'Object'] },
   jest: { instanceof: ['Function', 'Object'] },
   paths: { instanceof: ['Function', 'Object'] }
 }

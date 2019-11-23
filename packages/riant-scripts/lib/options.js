@@ -7,7 +7,7 @@ const ajv = new Ajv({
   verbose: true,
   $data: true
 });
-require('ajv-keywords')(ajv, ['instanceof']);
+require('ajv-keywords')(ajv, ['instanceof', 'typeof']);
 
 const compiledSchema = ajv.compile({
   title: 'RiantScriptsOptions',
@@ -15,6 +15,7 @@ const compiledSchema = ajv.compile({
   additionalProperties: false,
   properties: {
     alias: { instanceof: ['Function', 'Object'] },
+    babelPlugins: { instanceof: 'Array' },
     chainWebpack: { instanceof: ['Function', 'Object'] },
     configureWebpack: { instanceof: ['Function', 'Object'] },
     css: {
@@ -33,6 +34,7 @@ const compiledSchema = ajv.compile({
         }
       }
     },
+    devServer: { instanceof: ['Function', 'Object'] },
     extensions: {
       oneOf: [
         { type: 'array', items: { type: 'string' } },
@@ -40,7 +42,6 @@ const compiledSchema = ajv.compile({
       ]
     },
     externals: { instanceof: ['Function', 'Object'] },
-    devServer: { instanceof: ['Function', 'Object'] },
     jest: { instanceof: ['Function', 'Object'] },
     paths: { instanceof: ['Function', 'Object'] }
   }
