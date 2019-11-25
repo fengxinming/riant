@@ -1,6 +1,6 @@
 'use strict';
 
-const { isFunction, isObject } = require('../utils');
+const { isFunction, toString } = require('../utils');
 
 /**
  * 处理自定义配置 externals
@@ -14,9 +14,15 @@ module.exports = function (service, projectOptions) {
     const { externals } = projectOptions;
 
     if (isFunction(externals)) {
-      externals(chain.externals, webpackEnv);
-    } else if (isObject(externals)) {
-      chain.externals.merge(externals);
+      const res = externals(chain.get('externals'), webpackEnv);
+      // 如果有返回值，就使用返回值
+      if (res) {
+        chain.externals(res);
+      }
+    } else if (toString(externals) === '[object Object]') {
+      chain.externals(Object.assign({}, chain.get('externals'), externals));
+    } else if (externals) {
+      chain.externals(externals);
     }
   });
 };

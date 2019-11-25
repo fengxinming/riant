@@ -1,6 +1,5 @@
 'use strict';
 
-const merge = require('webpack-merge');
 const { isFunction, isObject } = require('../utils');
 
 /**
@@ -18,17 +17,15 @@ module.exports = function (service, projectOptions) {
   require(`${reactScriptVersion}/config/env`);
 
   // 原 paths 配置
-  let originalPaths = service.paths;
+  const originalPaths = service.paths;
 
   if (isFunction(paths)) {
     const res = paths(originalPaths, process.env.NODE_ENV);
-    if (res) {
-      originalPaths = merge(originalPaths, res);
+    if (isObject(res)) {
+      // 缓存 paths
+      service.paths = res;
     }
   } else if (isObject(paths)) {
     Object.assign(originalPaths, paths);
   }
-
-  // 缓存 paths
-  service.paths = originalPaths;
 };

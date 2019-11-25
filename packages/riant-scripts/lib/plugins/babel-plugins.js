@@ -1,5 +1,7 @@
 'use strict';
 
+const { isFunction } = require('../utils');
+
 const { isArray } = Array;
 /**
  * 处理自定义配置 babelPlugins
@@ -12,13 +14,19 @@ module.exports = function (service, projectOptions) {
     // 方便查看依赖的全局配置参数
     const { babelPlugins } = projectOptions;
 
-    if (isArray(babelPlugins)) {
-      chain
-        .module
-        .rule('main')
-        .oneOf('babel')
-        .get('options')
-        .plugins.push(...babelPlugins);
+    const options = chain
+      .module
+      .rule('main')
+      .oneOf('babel')
+      .get('options');
+
+    if (isFunction(babelPlugins)) {
+      const res = babelPlugins(options.plugins);
+      if (isArray(res)) {
+        options.plugins = res;
+      }
+    } else if (isArray(babelPlugins)) {
+      options.plugins.push(...babelPlugins);
     }
   });
 };

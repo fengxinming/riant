@@ -15,8 +15,8 @@ const compiledSchema = ajv.compile({
   additionalProperties: false,
   properties: {
     alias: { instanceof: ['Function', 'Object'] },
-    babelPlugins: { instanceof: 'Array' },
-    chainWebpack: { instanceof: ['Function', 'Object'] },
+    babelPlugins: { instanceof: ['Function', 'Array'] },
+    chainWebpack: { instanceof: 'Function' },
     configureWebpack: { instanceof: ['Function', 'Object'] },
     css: {
       type: 'object',
@@ -35,13 +35,8 @@ const compiledSchema = ajv.compile({
       }
     },
     devServer: { instanceof: ['Function', 'Object'] },
-    extensions: {
-      oneOf: [
-        { type: 'array', items: { type: 'string' } },
-        { instanceof: 'Function' }
-      ]
-    },
-    externals: { instanceof: ['Function', 'Object'] },
+    extensions: { instanceof: ['Function', 'Array'] },
+    externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
     jest: { instanceof: ['Function', 'Object'] },
     paths: { instanceof: ['Function', 'Object'] }
   }

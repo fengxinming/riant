@@ -1,5 +1,5 @@
 # riant-scripts
-> 使用 [create-react-app](https://github.com/facebookincubator/create-react-app) 创建您的应用, 然后自定义 webpack 相关配置
+> 使用 [create-react-app](https://github.com/facebookincubator/create-react-app) 创建您的应用, 然后自定义 webpack 相关配置, 内置 less 和 stylus 配置规则.
 
 ## 安装 riant-scripts
 
@@ -9,11 +9,112 @@ $ npm install riant-scripts --save-dev
 
 ### 在根目录中创建一个 riant.config.js 文件
 
+```javascript
 /* riant.config.js */
 module.exports = {
-  alias: { 
+  // 配置别名
+  alias: {
     '@': path.join(__dirname, 'src')
-  }
+  },
+  // alias(chainedMap, env) {
+  //   chainedMap.set('@', path.join(__dirname, 'src'));
+  // },
+
+  // 配置 babel 插件 
+  babelPlugins: [
+    [
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: 'css',
+      },
+      'fix-import-imports'
+    ], 
+    ['@babel/plugin-proposal-decorators', { legacy: true }]
+  ],
+  // babelPlugins(arr, env) {
+  //   return arr.concat([
+  //     'import',
+  //     {
+  //       libraryName: 'antd',
+  //       libraryDirectory: 'es',
+  //       style: 'css',
+  //     },
+  //     'fix-import-imports'
+  //   ], ['@babel/plugin-proposal-decorators', { legacy: true }]);
+  //   // or
+  //   arr.push([
+  //     'import',
+  //     {
+  //       libraryName: 'antd',
+  //       libraryDirectory: 'es',
+  //       style: 'css',
+  //     },
+  //     'fix-import-imports'
+  //   ], ['@babel/plugin-proposal-decorators', { legacy: true }]);
+  // }
+
+  // 增加自定义配置
+  chainWebpack(chainedConfig, env) {
+
+  },
+
+  // 增加自定义配置
+  configureWebpack: {  },
+  // configureWebpack(objectConfig, env) {
+
+  // }
+
+  // 配置 loader 参数
+  css: {
+    loaderOptions: {
+      stylus: {
+        define: {
+          '$color': '#fff'
+        }
+      }
+    }
+  },
+
+  // 配置本地开发服务
+  devServer: { 
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8088',
+        changeOrigin: true
+      }
+    },
+  },
+  // devServer(devConfig, env) {
+
+  // }
+
+  // 查找文件的扩展名集合
+  extensions: ['.properties'],
+  // extensions(chainedSet, env) {
+  //   chainedSet.add('.properties');
+  // }
+
+  // 导入外部扩展
+  externals: {
+    jquery: 'jQuery'
+  },
+  // externals() {
+  //   return ...
+  // }
+
+  // jest 配置
+  jest(jestConfig) {
+    return jestConfig;
+  },
+
+  // 配置内置的 path
+  paths: {  }
+  // paths(pathsConfig, env) {
+
+  // }
+
 }
 ```
 
@@ -23,7 +124,8 @@ module.exports = {
 /* riant.config.js */
 module.exports = {
   alias: { instanceof: ['Function', 'Object'] },
-  chainWebpack: { instanceof: ['Function', 'Object'] },
+  babelPlugins: { instanceof: ['Function', 'Array'] },
+  chainWebpack: { instanceof: 'Function' },
   configureWebpack: { instanceof: ['Function', 'Object'] },
   css: {
     type: 'object',
@@ -42,14 +144,8 @@ module.exports = {
     }
   },
   devServer: { instanceof: ['Function', 'Object'] },
-  extensions: {
-    oneOf: [
-      { type: 'array', items: { type: 'string' } },
-      { instanceof: 'Function' }
-    ]
-  },
-  externals: { instanceof: ['Function', 'Object'] },
-  fixBabelImports: { instanceof: ['Array', 'Object'] },
+  extensions: { instanceof: ['Function', 'Array'] },
+  externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
   jest: { instanceof: ['Function', 'Object'] },
   paths: { instanceof: ['Function', 'Object'] }
 }

@@ -143,6 +143,7 @@ class Service {
   }
 
   webpack(webpackConfig, env) {
+    // console.log(require('util').inspect(webpackConfig, { depth: Infinity }));
     const chainableConfig = new Config();
 
     // 初始化链式配置对象
