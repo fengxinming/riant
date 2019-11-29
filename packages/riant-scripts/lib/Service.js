@@ -80,8 +80,11 @@ class Service {
   loadUserOptions() {
     // riant.config.js
     let fileConfig, resolved;
-    const { configPath, configFile } = this;
+    const { configPath, configFile, reactScriptVersion } = this;
     let resolvedFrom = configFile;
+
+    // 加载环境配置文件
+    require(`${reactScriptVersion}/config/env`);
 
     if (existsSync(configPath)) {
       try {

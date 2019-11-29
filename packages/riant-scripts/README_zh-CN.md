@@ -2,25 +2,25 @@
 
 [![npm package](https://nodei.co/npm/riant-scripts.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/riant-scripts)
 
-> Create your app using [create-react-app](https://github.com/facebookincubator/create-react-app) , and tweak the create-react-app webpack config(s) , especially preset `less-loader` and `stylus-loader` .
+> 使用 [create-react-app](https://github.com/facebookincubator/create-react-app) 创建您的应用, 然后自定义 webpack 相关配置, 内置 less 和 stylus 配置规则.
 
 [![NPM version](https://img.shields.io/npm/v/riant-scripts.svg?style=flat)](https://npmjs.org/package/riant-scripts)
 [![NPM Downloads](https://img.shields.io/npm/dm/riant-scripts.svg?style=flat)](https://npmjs.org/package/riant-scripts)
 
-## [中文文档](README_zh-CN.md)
+## [English Documentation](README.md)
 
-## Install riant-scripts
+## 安装 riant-scripts
 
 ```bash
 $ npm install riant-scripts --save-dev
 ```
 
-### Create a riant.config.js file in the root directory
+### 在根目录中创建一个 riant.config.js 文件
 
 ```javascript
 /* riant.config.js */
 module.exports = {
-  // Create aliases to import or require certain modules more easily
+  // 配置别名
   alias: {
     '@': path.join(__dirname, 'src')
   },
@@ -28,7 +28,7 @@ module.exports = {
   //   chainedMap.set('@', path.join(__dirname, 'src'));
   // },
 
-  // Add babel plugins 
+  // 配置 babel 插件 
   babelPlugins: [
     [
       'import',
@@ -63,18 +63,18 @@ module.exports = {
   //   ], ['@babel/plugin-proposal-decorators', { legacy: true }]);
   // }
 
-  // Configure custom webpack config
+  // 增加自定义配置
   chainWebpack(chainedConfig, env) {
 
   },
 
-  // Configure custom webpack config
+  // 增加自定义配置
   configureWebpack: {  },
   // configureWebpack(objectConfig, env) {
 
   // }
 
-  // Configure custom style loader options
+  // 配置 loader 参数
   css: {
     loaderOptions: {
       stylus: {
@@ -85,7 +85,7 @@ module.exports = {
     }
   },
 
-  // Configure Dev Server
+  // 配置本地开发服务
   devServer: { 
     proxy: {
       '/api': {
@@ -98,13 +98,13 @@ module.exports = {
 
   // }
 
-  // Attempt to resolve these extensions in order.
+  // 查找文件的扩展名集合
   extensions: ['.properties'],
   // extensions(chainedSet, env) {
   //   chainedSet.add('.properties');
   // }
 
-  // Prevent bundling of certain imported packages and instead retrieve these external dependencies at runtime.
+  // 导入外部扩展
   externals: {
     jquery: 'jQuery'
   },
@@ -112,12 +112,12 @@ module.exports = {
   //   return ...
   // }
 
-  // Attempt to update jest config
+  // jest 配置
   jest(jestConfig) {
     return jestConfig;
   },
 
-  // Attempt to update paths
+  // 配置内置的 path
   paths: {  }
   // paths(pathsConfig, env) {
 
@@ -169,7 +169,7 @@ module.exports = {
 |   +-- src
 ```
 
-### Use riant-scripts instead of react-scripts in npm scripts of package.json for start、build and test
+### 替换 package.json 中 scripts 执行部分
 
 ```diff
   /* package.json */
@@ -184,15 +184,15 @@ module.exports = {
     "eject": "react-scripts eject"
 }
 ```
-Note: Keep the eject script. That gets run only once for a project, after which you are given full control over the webpack configuration making riant-scripts no longer required. 
+ 注意：不用替换 `eject` 部分。工具中没有针对 `eject` 的配置替换，执行了 eject 命令会让工具失去作用。
 
-### Start the Dev Server
+### 启动开发服务
 
 ```bash
 $ npm start
 ```
 
-### Build your app
+### 构建你的应用程序
 
 ```bash
 $ npm run build

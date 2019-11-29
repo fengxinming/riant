@@ -12,10 +12,6 @@ module.exports = function (service, projectOptions) {
   // 方便查看依赖的全局配置参数
   const { paths } = projectOptions;
 
-  const { reactScriptVersion } = service;
-  // 加载环境配置文件
-  require(`${reactScriptVersion}/config/env`);
-
   // 原 paths 配置
   const originalPaths = service.paths;
 
