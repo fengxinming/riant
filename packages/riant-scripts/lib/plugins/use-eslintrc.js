@@ -7,12 +7,12 @@
  * @param {Object} projectOptions
  */
 module.exports = function (service, projectOptions) {
-  service.chainWebpack(function (chain, webpackEnv) {
-    // 方便查看依赖的全局配置参数
-    const { useEslintrc } = projectOptions;
+  // 方便查看依赖的全局配置参数
+  const { useEslintrc } = projectOptions;
 
-    if (useEslintrc) {
-      process.env.EXTEND_ESLINT = 'true';
+  if (useEslintrc) {
+    process.env.EXTEND_ESLINT = 'true';
+    service.chainWebpack(function (chain, webpackEnv) {
       chain.module
         .rule('eslint')
         .use('eslint-loader')
@@ -20,6 +20,6 @@ module.exports = function (service, projectOptions) {
           options.useEslintrc = true;
           return options;
         });
-    }
-  });
+    });
+  }
 };

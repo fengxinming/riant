@@ -111,11 +111,13 @@ module.exports = function (service, projectOptions) {
 
     // 安装 less less-loader 模块即可支持解析 less 文件
     try {
+      require.resolve('less-loader');
       createCSSRule('less', '\\.less$', 'less-loader', loaderOptions.less);
     } catch (e) { }
 
     // 安装 stylus stylus-loader 模块即可支持解析 stylus 文件
     try {
+      require.resolve('stylus-loader');
       createCSSRule('stylus', '\\.styl(us)?$', 'stylus-loader', Object.assign({
         preferPathResolver: 'webpack'
       }, loaderOptions.stylus));
