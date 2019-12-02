@@ -118,10 +118,13 @@ module.exports = {
   },
 
   // Attempt to update paths
-  paths: {  }
+  paths: {  },
   // paths(pathsConfig, env) {
 
   // }
+
+  // use eslintrc
+  useEslintrc: true
 
 }
 ```
@@ -155,7 +158,8 @@ module.exports = {
   extensions: { instanceof: ['Function', 'Array'] },
   externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
   jest: { instanceof: ['Function', 'Object'] },
-  paths: { instanceof: ['Function', 'Object'] }
+  paths: { instanceof: ['Function', 'Object'] },
+  useEslintrc: { type: 'boolean' }
 }
 ```
 

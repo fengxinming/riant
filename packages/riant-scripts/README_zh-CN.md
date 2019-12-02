@@ -118,10 +118,13 @@ module.exports = {
   },
 
   // 配置内置的 path
-  paths: {  }
+  paths: {  },
   // paths(pathsConfig, env) {
 
   // }
+
+  // 自定义 eslint 规则
+  useEslintrc: true
 
 }
 ```
@@ -155,7 +158,8 @@ module.exports = {
   extensions: { instanceof: ['Function', 'Array'] },
   externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
   jest: { instanceof: ['Function', 'Object'] },
-  paths: { instanceof: ['Function', 'Object'] }
+  paths: { instanceof: ['Function', 'Object'] },
+  useEslintrc: { type: 'boolean' }
 }
 ```
 
