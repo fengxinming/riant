@@ -65,7 +65,13 @@ module.exports = {
 
   // 增加自定义配置
   chainWebpack(chainedConfig, env) {
-
+    // 剔除 console.log
+    chainedConfig.optimization
+      .minimizer('TerserPlugin')
+      .init((plugin)=> {
+        plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
+        return plugin;
+      });
   },
 
   // 增加自定义配置

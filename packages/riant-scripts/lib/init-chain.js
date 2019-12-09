@@ -65,6 +65,7 @@ function chainModule(chainableModule, moduleConfig) {
       const chainableMainRule = chainableModule.rule('main');
       ruleConfig.oneOf.forEach((childRuleConfig, j) => {
         const childRuleName = getRuleName(childRuleConfig);
+        // console.log('childRuleName => ', childRuleName);
         switch (childRuleName) {
           case 'babel':
             mergeRule(chainableMainRule.oneOf(childRuleConfig.exclude ? 'babel-outside' : 'babel'), childRuleConfig);
@@ -87,11 +88,11 @@ function chainModule(chainableModule, moduleConfig) {
 
 function getRuleName(rule) {
   const loader = (rule.loader || getLastLoader(rule.use));
-  return loader && loader.replace(/.+[/@]([a-z]+)-loader\/.+/, '$1');
+  return loader && loader.replace(/.+[/\\@]([a-z]+)-loader(?:\/|\\).+/, '$1');
 }
 
 function getLoaderName(rule) {
-  return getLastLoader(rule).replace(/.+[/@]([a-z]+-loader)\/.+/, '$1');
+  return getLastLoader(rule).replace(/.+[/\\@]([a-z]+-loader)(?:\/|\\).+/, '$1');
 }
 
 function mergeRule(chainableRule, ruleConfig) {
