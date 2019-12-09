@@ -58,16 +58,6 @@
       2,
       "property"
     ],
-    "prefer-arrow-callback": 0,
-    "operator-linebreak": [
-      2,
-      "after",
-      {
-        "overrides": {
-          "?": "ignore",
-          ":": "ignore"
-        }
-      }
-    ]
+    "prefer-arrow-callback": 0
   }
 }

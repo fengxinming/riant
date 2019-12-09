@@ -10,6 +10,11 @@ const { isArray } = Array;
  * @param {Object} webpackConfig
  */
 module.exports = function (chain, webpackConfig) {
+  chainOptimization(chain.optimization, webpackConfig.optimization);
+  webpackConfig.optimization.minimizer = [];
+  webpackConfig.optimization.splitChunks = {};
+  webpackConfig.optimization.runtimeChunk = {};
+
   chainResolve(chain.resolve, webpackConfig.resolve);
   webpackConfig.resolve.modules = [];
   webpackConfig.resolve.extensions = [];
@@ -18,10 +23,37 @@ module.exports = function (chain, webpackConfig) {
   webpackConfig.module = {};
 };
 
+/**
+ * 初始化 optimization 节点
+ * @param {webpack-chain} chainableOptimization
+ * @param {Object} optimizationConfig
+ */
+function chainOptimization(chainableOptimization, optimizationConfig) {
+  chainableOptimization.minimize(optimizationConfig.minimize);
+  optimizationConfig.minimizer.forEach((n, i) => {
+    const { name } = n.constructor;
+    chainableOptimization
+      .minimizer(name === 'Object' ? i : name)
+      .use(n);
+  });
+  chainableOptimization.splitChunks(optimizationConfig.splitChunks);
+  chainableOptimization.runtimeChunk(optimizationConfig.runtimeChunk);
+}
+
+/**
+ * 初始化 resolve 节点
+ * @param {webpack-chain} chainableResolve
+ * @param {Object} resolveConfig
+ */
 function chainResolve(chainableResolve, resolveConfig) {
   chainableResolve.merge(resolveConfig, ['plugin']);
 }
 
+/**
+ * 初始化 module 节点
+ * @param {webpack-chain} chainableModule
+ * @param {Object} moduleConfig
+ */
 function chainModule(chainableModule, moduleConfig) {
   chainableModule.merge(moduleConfig, ['rules']);
 
