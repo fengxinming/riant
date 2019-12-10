@@ -1,0 +1,33 @@
+{
+  "name": "cra-template-riant",
+  "version": "1.0.0",
+  "description": "The riant template for Create React App",
+  "keywords": [
+    "react",
+    "riant",
+    "riant-scripts",
+    "create-react-app",
+    "template"
+  ],
+  "author": "fengxinming <fxm0016@126.com>",
+  "homepage": "https://github.com/react-hobby/riant#readme",
+  "license": "MIT",
+  "main": "template.json",
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-hobby/riant.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/react-hobby/riant/issues"
+  },
+  "dependencies": {
+    "riant-scripts": "^1.1.4-2"
+  }
+}

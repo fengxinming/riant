@@ -1,31 +1,32 @@
 {
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
+    "start:react-app": "lerna run --scope demo-react-app start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish": "node ./scripts/publish"
   },
   "author": "Jesse Feng",
   "license": "MIT",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
   "devDependencies": {
     "cross-spawn": "^7.0.1",
+    "cz-lerna-changelog": "^2.0.2",
     "eslint": "^6.7.2",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "lerna": "^3.19.0",
+    "lerna-changelog": "^0.8.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/react-hobby/riant.git"
-  },
-  "keywords": [
-    "react",
-    "react-scripts",
-    "create-react-app"
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "bugs": {
-    "url": "https://github.com/react-hobby/riant/issues"
-  },
-  "homepage": "https://github.com/react-hobby/riant#readme"
+  "name": "riant"
 }

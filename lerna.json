@@ -1,0 +1,17 @@
+{
+  "npmClient": "tyarn",
+  "version": "independent",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "exact": true
+    },
+    "bootstrap": {
+      "hoist": true
+    }
+  },
+  "ignoreChanges": [
+    "**/*.md"
+  ]
+}
