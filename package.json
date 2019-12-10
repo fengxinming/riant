@@ -1,9 +1,10 @@
 {
+  "version": "1.0.0",
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
     "start:react-app": "lerna run --scope demo-react-app start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "node ./scripts/publish"
+    "release": "node ./scripts/release"
   },
   "author": "Jesse Feng",
   "license": "MIT",

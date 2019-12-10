@@ -6,5 +6,5 @@ If you don't specify a template (for example, --template riant), this template w
 
 For more information, please refer to:
 
-* Getting Started – How to create a new app.
-* User Guide – How to develop apps bootstrapped with Create React App.
+- [Getting Started](https://create-react-app.dev/docs/getting-started) – How to create a new app.
+- [User Guide](https://create-react-app.dev) – How to develop apps bootstrapped with Create React App.

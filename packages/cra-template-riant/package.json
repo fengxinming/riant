@@ -12,6 +12,9 @@
   "author": "fengxinming <fxm0016@126.com>",
   "homepage": "https://github.com/react-hobby/riant#readme",
   "license": "MIT",
+  "engines": {
+    "node": ">=8.10"
+  },
   "main": "template.json",
   "files": [
     "template",
@@ -19,15 +22,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-hobby/riant.git"
+    "url": "git+https://github.com/react-hobby/riant.git",
+    "directory": "packages/cra-template-riant"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/react-hobby/riant/issues"
-  },
-  "dependencies": {
-    "riant-scripts": "^1.1.4-2"
   }
 }

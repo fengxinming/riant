@@ -16,13 +16,10 @@ function publish(arr, getDir) {
 
 const [, , name, ...args] = process.argv;
 
-const es6packages = [
-];
-
 const es5Packages = [
   'riant',
-  'riant-scripts'
+  'riant-scripts',
+  'cra-template-riant'
 ];
 
-publish(es6packages, packageName => join(__dirname, '..', 'packages', packageName, 'npm'));
 publish(es5Packages, packageName => join(__dirname, '..', 'packages', packageName));
