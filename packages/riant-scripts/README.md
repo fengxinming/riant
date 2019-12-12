@@ -85,7 +85,7 @@ module.exports = {
     loaderOptions: {
       stylus: {
         define: {
-          '$color': '#fff'
+          '$cdn': 'https://cdn.jsdelivr.net'
         }
       }
     }
