@@ -7,16 +7,16 @@ if (process.env.NODE_ENV === 'development') {
 // riant
 module.exports = {
   alias: {
-    '@': join(__dirname, 'src')
+    '~': join(__dirname, 'src')
   },
 
   chainWebpack(chainedConfig, env) {
-    // 剔除 console.log
-    chainedConfig.optimization
-      .minimizer('TerserPlugin')
-      .init((plugin)=> {
+    if (env === 'production') {
+      // 剔除 console.log
+      chainedConfig.optimization.minimizer('TerserPlugin').init(plugin => {
         plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
         return plugin;
       });
+    }
   }
 };

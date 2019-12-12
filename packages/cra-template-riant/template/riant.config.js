@@ -6,12 +6,12 @@ module.exports = {
   },
 
   chainWebpack(chainedConfig, env) {
-    // 剔除 console.log
-    chainedConfig.optimization
-      .minimizer('TerserPlugin')
-      .init((plugin) => {
+    if (env === 'production') {
+      // 剔除 console.log
+      chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {
         plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
         return plugin;
       });
+    }
   }
 };

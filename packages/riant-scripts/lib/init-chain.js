@@ -10,48 +10,69 @@ const { isArray } = Array;
  * @param {Object} webpackConfig
  */
 module.exports = function (chain, webpackConfig) {
+  chain
+    .mode(webpackConfig.mode)
+    .bail(webpackConfig.bail)
+    .devtool(webpackConfig.devtool);
+
+  chainEntry(chain.entry('main'), webpackConfig.entry);
+
+  chain.output.merge(webpackConfig.output);
+
   chainOptimization(chain.optimization, webpackConfig.optimization);
-  webpackConfig.optimization.minimizer = [];
-  webpackConfig.optimization.splitChunks = {};
-  webpackConfig.optimization.runtimeChunk = {};
 
   chainResolve(chain.resolve, webpackConfig.resolve);
-  webpackConfig.resolve.modules = [];
-  webpackConfig.resolve.extensions = [];
 
   chainModule(chain.module, webpackConfig.module);
-  webpackConfig.module = {};
+
+  chainPlugins(chain, webpackConfig.plugins);
+
+  clear(webpackConfig, [
+    'output',
+    'optimization',
+    'resolve',
+    'module',
+    'plugins'
+  ]);
 };
 
 /**
+ * 初始化 entry 节点
+ * @param {ChainedSet} chainableEntry
+ * @param {Object} entryConfig
+ */
+function chainEntry(chainableEntry, entryConfig) {
+  entryConfig.forEach((n) => {
+    chainableEntry.add(n);
+  });
+}
+
+/**
  * 初始化 optimization 节点
- * @param {webpack-chain} chainableOptimization
+ * @param {ChainedMap} chainableOptimization
  * @param {Object} optimizationConfig
  */
 function chainOptimization(chainableOptimization, optimizationConfig) {
-  chainableOptimization.minimize(optimizationConfig.minimize);
+  chainableOptimization.merge(optimizationConfig, 'minimizer');
   optimizationConfig.minimizer.forEach((n, i) => {
     const { name } = n.constructor;
-    chainableOptimization
-      .minimizer(name === 'Object' ? i : name)
-      .use(n);
+    chainableOptimization.minimizer(name === 'Object' ? i : name).use(n);
   });
-  chainableOptimization.splitChunks(optimizationConfig.splitChunks);
-  chainableOptimization.runtimeChunk(optimizationConfig.runtimeChunk);
 }
 
 /**
  * 初始化 resolve 节点
- * @param {webpack-chain} chainableResolve
+ * @param {ChainedMap} chainableResolve
  * @param {Object} resolveConfig
  */
 function chainResolve(chainableResolve, resolveConfig) {
   chainableResolve.merge(resolveConfig, ['plugin']);
+  chainPlugins(chainableResolve, resolveConfig.plugins);
 }
 
 /**
  * 初始化 module 节点
- * @param {webpack-chain} chainableModule
+ * @param {ChainedMap} chainableModule
  * @param {Object} moduleConfig
  */
 function chainModule(chainableModule, moduleConfig) {
@@ -68,16 +89,34 @@ function chainModule(chainableModule, moduleConfig) {
         // console.log('childRuleName => ', childRuleName);
         switch (childRuleName) {
           case 'babel':
-            mergeRule(chainableMainRule.oneOf(childRuleConfig.exclude ? 'babel-outside' : 'babel'), childRuleConfig);
+            mergeRule(
+              chainableMainRule.oneOf(
+                childRuleConfig.exclude ? 'babel-outside' : 'babel'
+              ),
+              childRuleConfig
+            );
             break;
           case 'postcss':
-            mergeRule(chainableMainRule.oneOf(childRuleConfig.exclude ? 'postcss-module' : 'postcss'), childRuleConfig);
+            mergeRule(
+              chainableMainRule.oneOf(
+                childRuleConfig.exclude ? 'postcss-module' : 'postcss'
+              ),
+              childRuleConfig
+            );
             break;
           case 'sass':
-            mergeRule(chainableMainRule.oneOf(childRuleConfig.exclude ? 'sass-module' : 'sass'), childRuleConfig);
+            mergeRule(
+              chainableMainRule.oneOf(
+                childRuleConfig.exclude ? 'sass-module' : 'sass'
+              ),
+              childRuleConfig
+            );
             break;
           default:
-            mergeRule(chainableMainRule.oneOf(childRuleName, j), childRuleConfig);
+            mergeRule(
+              chainableMainRule.oneOf(childRuleName, j),
+              childRuleConfig
+            );
         }
       });
     } else {
@@ -86,13 +125,30 @@ function chainModule(chainableModule, moduleConfig) {
   });
 }
 
+/**
+ * 初始化 plugins 节点
+ * @param {webpack-chain} webpackChain
+ * @param {Object} pluginConfig
+ */
+function chainPlugins(webpackChain, pluginConfig) {
+  pluginConfig.forEach((n, i) => {
+    const { name } = n.constructor;
+    webpackChain.plugin(
+      nextName(webpackChain.plugins, name === 'Object' ? i : name)
+    ).use(n);
+  });
+}
+
 function getRuleName(rule) {
-  const loader = (rule.loader || getLastLoader(rule.use));
+  const loader = rule.loader || getLastLoader(rule.use);
   return loader && loader.replace(/.+[/\\@]([a-z]+)-loader(?:\/|\\).+/, '$1');
 }
 
 function getLoaderName(rule) {
-  return getLastLoader(rule).replace(/.+[/\\@]([a-z]+-loader)(?:\/|\\).+/, '$1');
+  return getLastLoader(rule).replace(
+    /.+[/\\@]([a-z]+-loader)(?:\/|\\).+/,
+    '$1'
+  );
 }
 
 function mergeRule(chainableRule, ruleConfig) {
@@ -100,8 +156,11 @@ function mergeRule(chainableRule, ruleConfig) {
   add(chainableRule.exclude, ruleConfig.exclude);
   add(chainableRule.include, ruleConfig.include);
   ruleConfig.test && chainableRule.test(ruleConfig.test);
-  ruleConfig.use && ruleConfig.use.forEach(loaderConfig =>
-    chainableRule.use(getLoaderName(loaderConfig))[isObject(loaderConfig) ? 'merge' : 'loader'](loaderConfig));
+  ruleConfig.use &&
+    ruleConfig.use.forEach(loaderConfig =>
+      chainableRule
+        .use(getLoaderName(loaderConfig))[isObject(loaderConfig) ? 'merge' : 'loader'](loaderConfig)
+    );
 }
 
 function getLastLoader(use) {
@@ -116,4 +175,25 @@ function add(chainableSet, item) {
     }
     item.forEach(n => chainableSet.add(n));
   }
+}
+
+function nextName(chainableMap, name) {
+  if (chainableMap.has(name)) {
+    const matched = name.match(/^(\S+)-(\d+)$/);
+    return matched
+      ? nextName(chainableMap, `${matched[1]}-${+matched[2] + 1}`)
+      : `${name}-1`;
+  }
+  return name;
+}
+
+function clear(webpackConfig, props) {
+  props.forEach((prop) => {
+    const val = webpackConfig[prop] = [];
+    if (isArray(val)) {
+      webpackConfig[prop] = [];
+    } else if (isObject(val)) {
+      webpackConfig[prop] = {};
+    }
+  });
 }
