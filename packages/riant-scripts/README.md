@@ -17,18 +17,31 @@ $ npm install riant-scripts --save-dev
 
 ### Create a riant.config.js file in the root directory
 
+#### Create aliases to import or require certain modules more easily
+
 ```javascript
 /* riant.config.js */
 module.exports = {
-  // Create aliases to import or require certain modules more easily
   alias: {
     '@': path.join(__dirname, 'src')
-  },
-  // alias(chainedMap, env) {
-  //   chainedMap.set('@', path.join(__dirname, 'src'));
-  // },
+  }
+}
+```
 
-  // Add babel plugins 
+```javascript
+/* riant.config.js */
+module.exports = {
+  alias(chainedMap, env) {
+    chainedMap.set('@', path.join(__dirname, 'src'));
+  }
+}
+```
+
+#### Add plugins to Babel
+
+```javascript
+/* riant.config.js */
+module.exports = {
   babelPlugins: [
     [
       'import',
@@ -40,47 +53,84 @@ module.exports = {
       'fix-import-imports'
     ], 
     ['@babel/plugin-proposal-decorators', { legacy: true }]
-  ],
-  // babelPlugins(arr, env) {
-  //   return arr.concat([
-  //     'import',
-  //     {
-  //       libraryName: 'antd',
-  //       libraryDirectory: 'es',
-  //       style: 'css',
-  //     },
-  //     'fix-import-imports'
-  //   ], ['@babel/plugin-proposal-decorators', { legacy: true }]);
-  //   // or
-  //   arr.push([
-  //     'import',
-  //     {
-  //       libraryName: 'antd',
-  //       libraryDirectory: 'es',
-  //       style: 'css',
-  //     },
-  //     'fix-import-imports'
-  //   ], ['@babel/plugin-proposal-decorators', { legacy: true }]);
-  // }
+  ]
+}
+```
 
-  // Configure custom webpack config
+```javascript
+/* riant.config.js */
+module.exports = {
+  babelPlugins(chainedSet, env) {
+    chainedSet.add([
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: 'css',
+      },
+      'fix-import-imports'
+    ]);
+    chainedSet.add(['@babel/plugin-proposal-decorators', { legacy: true }]);
+  }
+}
+```
+
+#### Customize Webpack config
+
+```javascript
+/* riant.config.js */
+module.exports = {
   chainWebpack(chainedConfig, env) {
     if (env === 'production') {
-      // remove `console.log`
+      // supporting Internet Explorer 9
+      chainedConfig
+        .entry('main')
+        .prepend(require.resolve('react-app-polyfill/stable'))
+        .prepend(require.resolve('react-app-polyfill/ie9'));
+
+      // without filename hashing
+      chainedConfig.output
+        .filename('static/js/[name].js')
+        .chunkFilename('static/js/[name].js');
+      chainedConfig.plugin('MiniCssExtractPlugin').init((plugin) => {
+        plugin.options.filename = 'static/css/[name].css';
+        plugin.options.chunkFilename = 'static/css/[name].chunk.css';
+        return plugin;
+      });
+
+      // without `console.log`
       chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {
         plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
         return plugin;
       });
     }
-  },
+  }
+}
+```
 
-  // Configure custom webpack config
-  configureWebpack: {  },
-  // configureWebpack(objectConfig, env) {
+```javascript
+/* riant.config.js */
+module.exports = {
+  configureWebpack(objectConfig, env) {
+    if (env === 'production') {
+      // without `console.log`
+      objectConfig
+        .optimization
+        .minimizer[0]
+        .options
+        .terserOptions
+        .compress
+        .pure_funcs = ['console.log'];
+    }
+  }
+}
+```
 
-  // }
+#### Customize style loader options
 
-  // Configure custom style loader options
+```javascript
+/* riant.config.js */
+module.exports = {
   css: {
     loaderOptions: {
       stylus: {
@@ -89,9 +139,15 @@ module.exports = {
         }
       }
     }
-  },
+  }
+}
+```
 
-  // Configure Dev Server
+#### Customize Dev Server config
+
+```javascript
+/* riant.config.js */
+module.exports = {
   devServer: { 
     proxy: {
       '/api': {
@@ -99,75 +155,105 @@ module.exports = {
         changeOrigin: true
       }
     },
-  },
-  // devServer(devConfig, env) {
-
-  // }
-
-  // Attempt to resolve these extensions in order.
-  extensions: ['.properties'],
-  // extensions(chainedSet, env) {
-  //   chainedSet.add('.properties');
-  // }
-
-  // Prevent bundling of certain imported packages and instead retrieve these external dependencies at runtime.
-  externals: {
-    jquery: 'jQuery'
-  },
-  // externals() {
-  //   return ...
-  // }
-
-  // Attempt to update jest config
-  jest(jestConfig) {
-    return jestConfig;
-  },
-
-  // Attempt to update paths
-  paths: {  },
-  // paths(pathsConfig, env) {
-
-  // }
-
-  // use eslintrc
-  useEslintrc: true
-
+  }
 }
 ```
-
-### Schema
 
 ```javascript
 /* riant.config.js */
 module.exports = {
-  alias: { instanceof: ['Function', 'Object'] },
-  babelPlugins: { instanceof: ['Function', 'Array'] },
-  chainWebpack: { instanceof: 'Function' },
-  configureWebpack: { instanceof: ['Function', 'Object'] },
-  css: {
-    type: 'object',
-    properties: {
-      modules: { type: 'boolean' },
-      sourceMap: { type: 'boolean' },
-      loaderOptions: {
-        type: 'object',
-        properties: {
-          css: { type: 'object' },
-          less: { type: 'object' },
-          stylus: { type: 'object' },
-          postcss: { type: 'object' }
-        }
+  devServer(devConfig, env) {
+    devConfig.proxy = {
+      '/api': {
+        target: 'http://localhost:8088',
+        changeOrigin: true
       }
-    }
-  },
-  devServer: { instanceof: ['Function', 'Object'] },
-  extensions: { instanceof: ['Function', 'Array'] },
-  externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
-  jest: { instanceof: ['Function', 'Object'] },
-  paths: { instanceof: ['Function', 'Object'] },
-  useEslintrc: { type: 'boolean' }
+    };
+  }
 }
 ```
+
+#### Attempt to resolve these extensions in order
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  extensions: ['.properties']
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  extensions(chainedSet, env) {
+    chainedSet.add('.properties');
+  }
+}
+```
+
+#### Prevent bundling of certain imported packages and instead retrieve these external dependencies at runtime
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  externals: {
+    jquery: 'jQuery'
+  }
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  externals() {
+    return {
+      jquery: 'jQuery'
+    };
+  }
+}
+```
+
+#### Attempt to update jest config
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  jest(jestConfig) {
+    return jestConfig;
+  }
+}
+```
+
+#### Attempt to update paths
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  paths: { 
+
+  }
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  paths(pathsConfig, env) {
+
+  }
+}
+```
+
+#### Use eslintrc
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  useEslintrc: true
+}
+```
+
+### Code Structure
 
 ```
 +-- your-project
@@ -208,6 +294,36 @@ $ npm start
 $ npm run build
 ```
 
-## Example
+## Schema
 
-* [test](test/react-app)
+```javascript
+/* riant.config.js */
+module.exports = {
+  alias: { instanceof: ['Function', 'Object'] },
+  babelPlugins: { instanceof: ['Function', 'Array'] },
+  chainWebpack: { instanceof: 'Function' },
+  configureWebpack: { instanceof: 'Function' },
+  css: {
+    type: 'object',
+    properties: {
+      modules: { type: 'boolean' },
+      sourceMap: { type: 'boolean' },
+      loaderOptions: {
+        type: 'object',
+        properties: {
+          css: { type: 'object' },
+          less: { type: 'object' },
+          stylus: { type: 'object' },
+          postcss: { type: 'object' }
+        }
+      }
+    }
+  },
+  devServer: { instanceof: ['Function', 'Object'] },
+  extensions: { instanceof: ['Function', 'Array'] },
+  externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
+  jest: { instanceof: ['Function', 'Object'] },
+  paths: { instanceof: ['Function', 'Object'] },
+  useEslintrc: { type: 'boolean' }
+}
+```

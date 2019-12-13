@@ -17,18 +17,31 @@ $ npm install riant-scripts --save-dev
 
 ### 在根目录中创建一个 riant.config.js 文件
 
+#### 配置别名
+
 ```javascript
 /* riant.config.js */
 module.exports = {
-  // 配置别名
   alias: {
     '@': path.join(__dirname, 'src')
-  },
-  // alias(chainedMap, env) {
-  //   chainedMap.set('@', path.join(__dirname, 'src'));
-  // },
+  }
+}
+```
 
-  // 配置 babel 插件 
+```javascript
+/* riant.config.js */
+module.exports = {
+  alias(chainedMap, env) {
+    chainedMap.set('@', path.join(__dirname, 'src'));
+  }
+}
+```
+
+#### 配置 babel 插件 
+
+```javascript
+/* riant.config.js */
+module.exports = {
   babelPlugins: [
     [
       'import',
@@ -40,47 +53,79 @@ module.exports = {
       'fix-import-imports'
     ], 
     ['@babel/plugin-proposal-decorators', { legacy: true }]
-  ],
-  // babelPlugins(arr, env) {
-  //   return arr.concat([
-  //     'import',
-  //     {
-  //       libraryName: 'antd',
-  //       libraryDirectory: 'es',
-  //       style: 'css',
-  //     },
-  //     'fix-import-imports'
-  //   ], ['@babel/plugin-proposal-decorators', { legacy: true }]);
-  //   // or
-  //   arr.push([
-  //     'import',
-  //     {
-  //       libraryName: 'antd',
-  //       libraryDirectory: 'es',
-  //       style: 'css',
-  //     },
-  //     'fix-import-imports'
-  //   ], ['@babel/plugin-proposal-decorators', { legacy: true }]);
-  // }
+  ]
+}
+```
 
-  // 增加自定义配置
+```javascript
+/* riant.config.js */
+module.exports = {
+  babelPlugins(chainedSet, env) {
+    chainedSet.add([
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: 'css',
+      },
+      'fix-import-imports'
+    ]);
+    chainedSet.add(['@babel/plugin-proposal-decorators', { legacy: true }]);
+  }
+}
+```
+
+#### 增加自定义配置
+
+```javascript
+/* riant.config.js */
+module.exports = {
   chainWebpack(chainedConfig, env) {
-    // 剔除 console.log
-    chainedConfig.optimization
-      .minimizer('TerserPlugin')
-      .init((plugin)=> {
+    if (env === 'production') {
+      // 去掉 hash 命名
+      chainedConfig.output
+        .filename('static/js/[name].js')
+        .chunkFilename('static/js/[name].js');
+      chainedConfig.plugin('MiniCssExtractPlugin').init((plugin) => {
+        plugin.options.filename = 'static/css/[name].css';
+        plugin.options.chunkFilename = 'static/css/[name].chunk.css';
+        return plugin;
+      });
+
+
+      // 移除 `console.log`
+      chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {
         plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
         return plugin;
       });
-  },
+    }
+  }
+}
+```
 
-  // 增加自定义配置
-  configureWebpack: {  },
-  // configureWebpack(objectConfig, env) {
+```javascript
+/* riant.config.js */
+module.exports = {
+  configureWebpack(objectConfig, env) {
+    if (env === 'production') {
+      // without `console.log`
+      objectConfig
+        .optimization
+        .minimizer[0]
+        .options
+        .terserOptions
+        .compress
+        .pure_funcs = ['console.log'];
+    }
+  }
+}
+```
 
-  // }
+#### 配置 loader 参数
 
-  // 配置 loader 参数
+```javascript
+/* riant.config.js */
+module.exports = {
   css: {
     loaderOptions: {
       stylus: {
@@ -89,9 +134,15 @@ module.exports = {
         }
       }
     }
-  },
+  }
+}
+```
 
-  // 配置本地开发服务
+#### 配置本地开发服务
+
+```javascript
+/* riant.config.js */
+module.exports = {
   devServer: { 
     proxy: {
       '/api': {
@@ -99,75 +150,105 @@ module.exports = {
         changeOrigin: true
       }
     },
-  },
-  // devServer(devConfig, env) {
-
-  // }
-
-  // 查找文件的扩展名集合
-  extensions: ['.properties'],
-  // extensions(chainedSet, env) {
-  //   chainedSet.add('.properties');
-  // }
-
-  // 导入外部扩展
-  externals: {
-    jquery: 'jQuery'
-  },
-  // externals() {
-  //   return ...
-  // }
-
-  // jest 配置
-  jest(jestConfig) {
-    return jestConfig;
-  },
-
-  // 配置内置的 path
-  paths: {  },
-  // paths(pathsConfig, env) {
-
-  // }
-
-  // 自定义 eslint 规则
-  useEslintrc: true
-
+  }
 }
 ```
-
-### Schema
 
 ```javascript
 /* riant.config.js */
 module.exports = {
-  alias: { instanceof: ['Function', 'Object'] },
-  babelPlugins: { instanceof: ['Function', 'Array'] },
-  chainWebpack: { instanceof: 'Function' },
-  configureWebpack: { instanceof: ['Function', 'Object'] },
-  css: {
-    type: 'object',
-    properties: {
-      modules: { type: 'boolean' },
-      sourceMap: { type: 'boolean' },
-      loaderOptions: {
-        type: 'object',
-        properties: {
-          css: { type: 'object' },
-          less: { type: 'object' },
-          stylus: { type: 'object' },
-          postcss: { type: 'object' }
-        }
+  devServer(devConfig, env) {
+    devConfig.proxy = {
+      '/api': {
+        target: 'http://localhost:8088',
+        changeOrigin: true
       }
-    }
-  },
-  devServer: { instanceof: ['Function', 'Object'] },
-  extensions: { instanceof: ['Function', 'Array'] },
-  externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
-  jest: { instanceof: ['Function', 'Object'] },
-  paths: { instanceof: ['Function', 'Object'] },
-  useEslintrc: { type: 'boolean' }
+    };
+  }
 }
 ```
+
+#### 查找文件的扩展名集合
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  extensions: ['.properties']
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  extensions(chainedSet, env) {
+    chainedSet.add('.properties');
+  }
+}
+```
+
+#### 导入外部扩展
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  externals: {
+    jquery: 'jQuery'
+  }
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  externals() {
+    return {
+      jquery: 'jQuery'
+    };
+  }
+}
+```
+
+#### jest 配置
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  jest(jestConfig) {
+    return jestConfig;
+  }
+}
+```
+
+#### 配置内置的 path
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  paths: { 
+
+  }
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  paths(pathsConfig, env) {
+
+  }
+}
+```
+
+#### 自定义 eslintrc 扩展 eslint 规则
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  useEslintrc: true
+}
+```
+
+### 代码结构
 
 ```
 +-- your-project
@@ -208,6 +289,36 @@ $ npm start
 $ npm run build
 ```
 
-## Example
+## Schema
 
-* [test](test/react-app)
+```javascript
+/* riant.config.js */
+module.exports = {
+  alias: { instanceof: ['Function', 'Object'] },
+  babelPlugins: { instanceof: ['Function', 'Array'] },
+  chainWebpack: { instanceof: 'Function' },
+  configureWebpack: { instanceof: 'Function' },
+  css: {
+    type: 'object',
+    properties: {
+      modules: { type: 'boolean' },
+      sourceMap: { type: 'boolean' },
+      loaderOptions: {
+        type: 'object',
+        properties: {
+          css: { type: 'object' },
+          less: { type: 'object' },
+          stylus: { type: 'object' },
+          postcss: { type: 'object' }
+        }
+      }
+    }
+  },
+  devServer: { instanceof: ['Function', 'Object'] },
+  extensions: { instanceof: ['Function', 'Array'] },
+  externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
+  jest: { instanceof: ['Function', 'Object'] },
+  paths: { instanceof: ['Function', 'Object'] },
+  useEslintrc: { type: 'boolean' }
+}
+```

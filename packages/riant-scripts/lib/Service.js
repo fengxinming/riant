@@ -153,14 +153,14 @@ class Service {
     initChain(chainableConfig, webpackConfig);
 
     // 优先执行链式回调
-    this.webpackChainFns.forEach(fn => fn(chainableConfig, env));
+    this.webpackChainFns.forEach(fn => fn(chainableConfig, env, this));
 
     // 获取未处理的 webpack 配置
     // 合并 chain webpack 后的配置
     let config = merge(webpackConfig, chainableConfig.toConfig());
     this.webpackRawConfigFns.forEach((fn) => {
       if (isFunction(fn)) {
-        const res = fn(config, env);
+        const res = fn(config, env, this);
         if (res) {
           config = merge(config, res);
         }

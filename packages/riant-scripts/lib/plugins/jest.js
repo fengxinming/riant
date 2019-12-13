@@ -58,5 +58,11 @@ module.exports = function (service, projectOptions) {
   });
 
   // 缓存 jest 配置
-  require.cache[require.resolve(createJestConfigPath)].exports = () => jest(defaultJestConfig);
+  require.cache[require.resolve(createJestConfigPath)].exports = () => {
+    let res = jest(defaultJestConfig);
+    if (!isObject(res)) {
+      res = defaultJestConfig;
+    }
+    return res;
+  };
 };

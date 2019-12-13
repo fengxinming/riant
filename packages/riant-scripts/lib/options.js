@@ -17,7 +17,7 @@ const compiledSchema = ajv.compile({
     alias: { instanceof: ['Function', 'Object'] },
     babelPlugins: { instanceof: ['Function', 'Array'] },
     chainWebpack: { instanceof: 'Function' },
-    configureWebpack: { instanceof: ['Function', 'Object'] },
+    configureWebpack: { instanceof: 'Function' },
     css: {
       type: 'object',
       properties: {

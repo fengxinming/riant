@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
-    "start:react-app": "lerna run --scope demo-react-app start",
+    "react-app": "lerna run --scope demo-react-app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "node ./scripts/release"
   },

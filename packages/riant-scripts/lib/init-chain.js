@@ -15,7 +15,7 @@ module.exports = function (chain, webpackConfig) {
     .bail(webpackConfig.bail)
     .devtool(webpackConfig.devtool);
 
-  chainEntry(chain.entry('main'), webpackConfig.entry);
+  chain.entry('main').merge(webpackConfig.entry);
 
   chain.output.merge(webpackConfig.output);
 
@@ -38,17 +38,6 @@ module.exports = function (chain, webpackConfig) {
     'node'
   ]);
 };
-
-/**
- * 初始化 entry 节点
- * @param {ChainedSet} chainableEntry
- * @param {Object} entryConfig
- */
-function chainEntry(chainableEntry, entryConfig) {
-  entryConfig.forEach((n) => {
-    chainableEntry.add(n);
-  });
-}
 
 /**
  * 初始化 optimization 节点
