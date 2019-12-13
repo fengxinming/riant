@@ -27,12 +27,15 @@ module.exports = function (chain, webpackConfig) {
 
   chainPlugins(chain, webpackConfig.plugins);
 
+  chain.node.merge(webpackConfig.node);
+
   clear(webpackConfig, [
     'output',
     'optimization',
     'resolve',
     'module',
-    'plugins'
+    'plugins',
+    'node'
   ]);
 };
 

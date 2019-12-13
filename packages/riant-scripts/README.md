@@ -65,13 +65,13 @@ module.exports = {
 
   // Configure custom webpack config
   chainWebpack(chainedConfig, env) {
-    // if (env === 'production') {
-    //   // remove `console.log`
-    //   chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {
-    //     plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
-    //     return plugin;
-    //   });
-    // }
+    if (env === 'production') {
+      // remove `console.log`
+      chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {
+        plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
+        return plugin;
+      });
+    }
   },
 
   // Configure custom webpack config

@@ -5,8 +5,7 @@
   ],
   "version": "independent",
   "packages": [
-    "packages/riant-*",
-    "packages/cra-template-*"
+    "packages/*"
   ],
   "changelog": {
     "repo": "react-hobby/riant",
