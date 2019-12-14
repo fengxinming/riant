@@ -99,6 +99,34 @@ module.exports = {
         return plugin;
       });
     }
+
+    // code splitting
+    if (env !== 'test') {
+      chainedConfig
+        .optimization.splitChunks({
+          cacheGroups: {
+            vendors: {
+              name: `chunk-vendors`,
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              chunks: 'initial'
+            },
+            common: {
+              name: `chunk-common`,
+              minChunks: 2,
+              priority: -20,
+              chunks: 'initial',
+              reuseExistingChunk: true
+            }
+          }
+        });
+      chainedConfig
+        .plugin('HtmlWebpackPlugin')
+        .init((plugin) => {
+          plugin.options.chunks = ['chunk-vendors', 'chunk-common', 'main'];
+          return plugin;
+        });
+    }
   }
 }
 ```
@@ -239,6 +267,21 @@ module.exports = {
 }
 ```
 
+#### 增加自定插件至 riant-scripts
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  riantPlugins: [
+    function (service, projectOptions) {
+
+    }
+  ]
+}
+```
+
+[插件参考](lib/plugins)
+
 #### 自定义 eslintrc 扩展 eslint 规则
 
 ```javascript
@@ -319,6 +362,7 @@ module.exports = {
   externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
   jest: { instanceof: ['Function', 'Object'] },
   paths: { instanceof: ['Function', 'Object'] },
+  riantPlugins: { instanceof: 'Array' },
   useEslintrc: { type: 'boolean' }
 }
 ```

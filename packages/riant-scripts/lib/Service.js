@@ -42,7 +42,12 @@ class Service {
     this.projectOptions = defaultsDeep(userOptions, defaults());
 
     // 执行插件
-    isArray(plugins) && plugins.forEach(plugin => plugin(this, this.projectOptions));
+    if (isArray(plugins)) {
+      if (isArray(this.projectOptions.riantPlugins)) {
+        plugins = plugins.concat(this.projectOptions.riantPlugins);
+      }
+      plugins.forEach(plugin => plugin(this, this.projectOptions));
+    }
 
     const scriptPkg = require(`${reactScriptVersion}/package.json`);
 

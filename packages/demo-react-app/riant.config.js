@@ -1,5 +1,4 @@
 const { join } = require('path');
-// require('react-app-polyfill')
 
 if (process.env.NODE_ENV === 'development') {
   process.stdout.isTTY = false;
@@ -29,11 +28,41 @@ module.exports = {
       chainedConfig.output
         .filename('static/js/[name].js')
         .chunkFilename('static/js/[name].js');
-      chainedConfig.plugin('MiniCssExtractPlugin').init((plugin) => {
-        plugin.options.filename = 'static/css/[name].css';
-        plugin.options.chunkFilename = 'static/css/[name].chunk.css';
-        return plugin;
-      });
+      chainedConfig
+        .plugin('MiniCssExtractPlugin')
+        .init((plugin) => {
+          plugin.options.filename = 'static/css/[name].css';
+          plugin.options.chunkFilename = 'static/css/[name].chunk.css';
+          return plugin;
+        });
+    }
+
+    // code splitting
+    if (env !== 'test') {
+      chainedConfig
+        .optimization.splitChunks({
+          cacheGroups: {
+            vendors: {
+              name: `chunk-vendors`,
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              chunks: 'initial'
+            },
+            common: {
+              name: `chunk-common`,
+              minChunks: 2,
+              priority: -20,
+              chunks: 'initial',
+              reuseExistingChunk: true
+            }
+          }
+        });
+      chainedConfig
+        .plugin('HtmlWebpackPlugin')
+        .init((plugin) => {
+          plugin.options.chunks = ['chunk-vendors', 'chunk-common', 'main'];
+          return plugin;
+        });
     }
   }
 };
