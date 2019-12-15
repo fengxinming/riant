@@ -12,13 +12,6 @@
     "afterEach": true
   },
   "rules": {
-    "arrow-parens": [
-      2,
-      "as-needed",
-      {
-        "requireForBlockBody": true
-      }
-    ],
     "padded-blocks": [
       "error",
       {

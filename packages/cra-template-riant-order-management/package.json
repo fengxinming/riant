@@ -1,5 +1,5 @@
 {
-  "name": "riant-order-management",
+  "name": "cra-template-riant-order-management",
   "version": "1.0.0",
   "description": "The riant-order-management template for Create React App",
   "keywords": [
@@ -23,7 +23,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-hobby/riant.git",
-    "directory": "packages/cra-template-riant"
+    "directory": "packages/cra-template-riant-order-management"
   },
   "bugs": {
     "url": "https://github.com/react-hobby/riant/issues"

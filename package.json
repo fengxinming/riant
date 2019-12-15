@@ -3,9 +3,9 @@
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
     "example:rom": "lerna run --scope riant-order-management",
-    "react-app-antd": "lerna run --scope demo-react-app-antd",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "node ./scripts/release"
+    "release": "node ./scripts/release",
+    "template": "node ./scripts/template"
   },
   "author": "Jesse Feng",
   "license": "MIT",

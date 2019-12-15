@@ -1,0 +1,16 @@
+.basic-layout
+  $header-height = 62px
+
+  .basic-layout-header
+    display flex
+    align-items center
+    justify-content flex-end
+    width 100%
+    height $header-height
+    padding 0 20px
+    background #ffffff
+    box-shadow 0 1px 4px rgba(0, 21, 41, 0.08)
+
+  .basic-layout-content
+    min-height unquote('calc(100vh - ' + $header-height + ')')
+    padding 20px

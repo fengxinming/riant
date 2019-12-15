@@ -8,7 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-hobby/riant.git"
+    "url": "git+https://github.com/react-hobby/riant.git",
+    "directory": "packages/riant"
   },
   "author": "Jesse Feng",
   "license": "MIT",

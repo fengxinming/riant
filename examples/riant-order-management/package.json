@@ -2,25 +2,21 @@
   "name": "riant-order-management",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.7.4",
     "@loadable/component": "^5.11.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^3.26.3",
-    "react": "^16.12.0",
-    "react-app-polyfill": "^1.0.5",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.7.4",
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-transform-jsx-class": "^0.1.2",
     "babel-plugin-transform-jsx-condition": "^0.1.2",
     "babel-runtime-jsx-plus": "^0.1.4",
-    "less": "^3.10.3",
-    "less-loader": "^5.0.0",
+    "react": "^16.12.0",
+    "react-app-polyfill": "^1.0.5",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2"
   },
@@ -43,5 +39,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "templateName": "cra-template-riant-order-management",
+  "template": {
+    "public": "template/public",
+    "src": "template/src",
+    ".gitignore": "template/.gitignore",
+    "jsconfig.json": "template/jsconfig.json",
+    "README.md": "template/README.md",
+    "riant.config.js": "template/riant.config.js"
   }
 }

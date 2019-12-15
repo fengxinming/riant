@@ -1,8 +1,8 @@
 const { join } = require('path');
 
-if (process.env.NODE_ENV === 'development') {
-  process.stdout.isTTY = false;
-}
+// if (process.env.NODE_ENV === 'development') {
+//   process.stdout.isTTY = false;
+// }
 
 module.exports = {
   alias: {
