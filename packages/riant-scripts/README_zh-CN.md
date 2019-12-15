@@ -60,17 +60,39 @@ module.exports = {
 ```javascript
 /* riant.config.js */
 module.exports = {
-  babelPlugins(chainedSet, env) {
-    chainedSet.add([
-      'import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'es',
-        style: 'css',
-      },
-      'fix-import-imports'
+  babelPlugins(plugins, env) {
+    plugins.push(
+      [
+        'import',
+        {
+          libraryName: 'antd',
+          libraryDirectory: 'es',
+          style: 'css',
+        },
+        'fix-import-imports'
+      ],
+      ['@babel/plugin-proposal-decorators', { legacy: true }]
+    );
+  }
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  babelPlugins(plugins, env) {
+    return plugins.concat([
+      [
+        'import',
+        {
+          libraryName: 'antd',
+          libraryDirectory: 'es',
+          style: 'css',
+        },
+        'fix-import-imports'
+      ],
+      ['@babel/plugin-proposal-decorators', { legacy: true }]
     ]);
-    chainedSet.add(['@babel/plugin-proposal-decorators', { legacy: true }]);
   }
 }
 ```
@@ -86,24 +108,27 @@ module.exports = {
       chainedConfig.output
         .filename('static/js/[name].js')
         .chunkFilename('static/js/[name].js');
-      chainedConfig.plugin('MiniCssExtractPlugin').init((plugin) => {
-        plugin.options.filename = 'static/css/[name].css';
-        plugin.options.chunkFilename = 'static/css/[name].chunk.css';
-        return plugin;
-      });
-
+      chainedConfig
+        .plugin('MiniCssExtractPlugin')
+        .init((plugin) => {
+          plugin.options.filename = 'static/css/[name].css';
+          plugin.options.chunkFilename = 'static/css/[name].chunk.css';
+          return plugin;
+        });
 
       // 移除 `console.log`
-      chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {
-        plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
-        return plugin;
-      });
+      chainedConfig.optimization
+        .minimizer('TerserPlugin')
+        .init((plugin) => {
+          plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
+          return plugin;
+        });
     }
 
     // code splitting
     if (env !== 'test') {
-      chainedConfig
-        .optimization.splitChunks({
+      chainedConfig.optimization
+        .splitChunks({
           cacheGroups: {
             vendors: {
               name: `chunk-vendors`,

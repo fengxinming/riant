@@ -1,5 +1,5 @@
 {
-  "name": "demo-react-app",
+  "name": "riant-app",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -17,10 +17,9 @@
     "stylus-loader": "^3.0.2"
   },
   "scripts": {
-    "start": "node ./riant-scripts start",
-    "build": "node ./riant-scripts build",
-    "test": "node ./riant-scripts test",
-    "eject": "node ./riant-scripts eject"
+    "start": "node ../../packages/riant-scripts/bin start",
+    "build": "node ../../packages/riant-scripts/bin build",
+    "test": "node ../../packages/riant-scripts/bin test"
   },
   "eslintConfig": {
     "extends": "react-app"

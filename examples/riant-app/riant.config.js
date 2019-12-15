@@ -9,6 +9,10 @@ module.exports = {
   alias: {
     '~': join(__dirname, 'src')
   },
+  
+  babelPlugins(plugins) {
+    console.log(plugins[0][0]);
+  },
 
   chainWebpack(chainedConfig, env) {
     if (env === 'production') {

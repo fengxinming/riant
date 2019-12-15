@@ -5,7 +5,8 @@
   ],
   "version": "independent",
   "packages": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "changelog": {
     "repo": "react-hobby/riant",

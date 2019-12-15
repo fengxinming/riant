@@ -7,7 +7,7 @@
 [![NPM version](https://img.shields.io/npm/v/riant-scripts.svg?style=flat)](https://npmjs.org/package/riant-scripts)
 [![NPM Downloads](https://img.shields.io/npm/dm/riant-scripts.svg?style=flat)](https://npmjs.org/package/riant-scripts)
 
-## [中文文档](README_zh-CN.md)
+## [中文文档](https://github.com/react-hobby/riant/blob/master/packages/riant-scripts/README_zh-CN.md)
 
 ## Install riant-scripts
 
@@ -57,20 +57,43 @@ module.exports = {
 }
 ```
 
+
 ```javascript
 /* riant.config.js */
 module.exports = {
-  babelPlugins(chainedSet, env) {
-    chainedSet.add([
-      'import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'es',
-        style: 'css',
-      },
-      'fix-import-imports'
+  babelPlugins(plugins, env) {
+    plugins.push(
+      [
+        'import',
+        {
+          libraryName: 'antd',
+          libraryDirectory: 'es',
+          style: 'css',
+        },
+        'fix-import-imports'
+      ],
+      ['@babel/plugin-proposal-decorators', { legacy: true }]
+    );
+  }
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  babelPlugins(plugins, env) {
+    return plugins.concat([
+      [
+        'import',
+        {
+          libraryName: 'antd',
+          libraryDirectory: 'es',
+          style: 'css',
+        },
+        'fix-import-imports'
+      ],
+      ['@babel/plugin-proposal-decorators', { legacy: true }]
     ]);
-    chainedSet.add(['@babel/plugin-proposal-decorators', { legacy: true }]);
   }
 }
 ```
@@ -92,11 +115,13 @@ module.exports = {
       chainedConfig.output
         .filename('static/js/[name].js')
         .chunkFilename('static/js/[name].js');
-      chainedConfig.plugin('MiniCssExtractPlugin').init((plugin) => {
-        plugin.options.filename = 'static/css/[name].css';
-        plugin.options.chunkFilename = 'static/css/[name].chunk.css';
-        return plugin;
-      });
+      chainedConfig
+        .plugin('MiniCssExtractPlugin')
+        .init((plugin) => {
+          plugin.options.filename = 'static/css/[name].css';
+          plugin.options.chunkFilename = 'static/css/[name].chunk.css';
+          return plugin;
+        });
 
       // without `console.log`
       chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {

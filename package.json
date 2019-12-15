@@ -2,7 +2,8 @@
   "version": "1.0.0",
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
-    "react-app": "lerna run --scope demo-react-app",
+    "example:rom": "lerna run --scope riant-order-management",
+    "react-app-antd": "lerna run --scope demo-react-app-antd",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "node ./scripts/release"
   },
