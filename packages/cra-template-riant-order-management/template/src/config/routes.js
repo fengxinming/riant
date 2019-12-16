@@ -18,6 +18,10 @@ const routerConfig = [
         componentAsync: OrderReport
       },
       {
+        path: '/',
+        redirect: '/dashboard'
+      },
+      {
         path: '*',
         component: NotFound
       }

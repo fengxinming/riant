@@ -13,7 +13,8 @@
     "react-app-polyfill": "^1.0.5",
     "react-router-dom": "^5.1.2",
     "stylus": "^0.54.7",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "riant-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "riant-scripts start",
