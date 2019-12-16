@@ -1,0 +1,31 @@
+{
+  "name": "cra-template-riant-antd",
+  "version": "1.0.0",
+  "description": "The antd template for Create React App",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "riant",
+    "riant-scripts"
+  ],
+  "author": "Jesse Feng <fxm0016@126.com>",
+  "homepage": "https://github.com/react-hobby/riant#readme",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.10"
+  },
+  "main": "template.json",
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-hobby/riant.git",
+    "directory": "packages/cra-template-riant-antd"
+  },
+  "bugs": {
+    "url": "https://github.com/react-hobby/riant/issues"
+  }
+}

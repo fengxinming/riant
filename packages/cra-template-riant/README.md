@@ -33,22 +33,22 @@ Inside that directory, it will generate the initial project structure and instal
 
 ```
 my-app
-├── README.md
-├── node_modules
-├── package.json
-├── jsconfig.json
-├── riant.config.js
-├── .gitignore
-├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   └── manifest.json
-└── src
-    ├── App.css
-    ├── App.js
-    ├── App.test.js
-    ├── index.css
-    ├── index.js
-    ├── logo.svg
-    └── serviceWorker.js
+  ├── README.md
+  ├── node_modules
+  ├── package.json
+  ├── jsconfig.json
+  ├── riant.config.js
+  ├── .gitignore
+  ├── public
+  │   ├── favicon.ico
+  │   ├── index.html
+  │   └── manifest.json
+  └── src
+      ├── App.css
+      ├── App.js
+      ├── App.test.js
+      ├── index.css
+      ├── index.js
+      ├── logo.svg
+      └── serviceWorker.js
 ```

@@ -1,4 +1,4 @@
-# cra-template-riant
+# cra-template-riant-order-management
 
 ## Creating an App
 
@@ -9,21 +9,21 @@ To create a new app, you may choose one of the following methods:
 ### npx
 
 ```bash
-npx create-react-app my-app --template riant
+npx create-react-app my-app --template riant-order-management
 cd my-app
 npm start
 ```
 
 ### npm
 ```bash
-npm init react-app my-app --template riant
+npm init react-app my-app --template riant-order-management
 cd my-app
 npm start
 ```
 
 ### yarn
 ```bash
-yarn create react-app my-app --template riant
+yarn create react-app my-app --template riant-order-management
 cd my-app
 npm start
 ```
@@ -33,22 +33,24 @@ Inside that directory, it will generate the initial project structure and instal
 
 ```
 my-app
-├── README.md
-├── node_modules
-├── package.json
-├── jsconfig.json
-├── riant.config.js
-├── .gitignore
-├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   └── manifest.json
-└── src
-    ├── App.css
-    ├── App.js
-    ├── App.test.js
-    ├── index.css
-    ├── index.js
-    ├── logo.svg
-    └── serviceWorker.js
+  ├── README.md
+  ├── node_modules
+  ├── package.json
+  ├── jsconfig.json
+  ├── riant.config.js
+  ├── .gitignore
+  ├── public
+  │   ├── favicon.ico
+  │   ├── index.html
+  │   └── manifest.json
+  └── src
+      ├── components
+      ├── config
+      ├── css
+      ├── layouts
+      ├── pages
+      ├── index.js
+      ├── router.js
+      ├── serviceWorker.js
+      └── setupTests.js
 ```

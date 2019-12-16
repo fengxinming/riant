@@ -1,7 +1,7 @@
 {
   "name": "cra-template-riant-order-management",
   "version": "1.0.0",
-  "description": "The riant-order-management template for Create React App",
+  "description": "The Order Management template for Create React App",
   "keywords": [
     "react",
     "create-react-app",

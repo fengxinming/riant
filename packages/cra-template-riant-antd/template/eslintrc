@@ -1,0 +1,7 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "sort-imports": "error",
+    "jsx-a11y/anchor-is-valid": "off"
+  }
+}

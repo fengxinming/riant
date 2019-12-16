@@ -12,11 +12,8 @@
     "babel-plugin-transform-jsx-class": "^0.1.2",
     "babel-plugin-transform-jsx-condition": "^0.1.2",
     "babel-runtime-jsx-plus": "^0.1.4",
-    "react": "^16.12.0",
     "react-app-polyfill": "^1.0.5",
-    "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2"
   },
@@ -44,9 +41,9 @@
   "template": {
     "public": "template/public",
     "src": "template/src",
-    ".gitignore": "template/.gitignore",
     "jsconfig.json": "template/jsconfig.json",
     "README.md": "template/README.md",
-    "riant.config.js": "template/riant.config.js"
+    "riant.config.js": "template/riant.config.js",
+    ".gitignore": "template/gitignore"
   }
 }

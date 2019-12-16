@@ -6,6 +6,7 @@ const {
   copy,
   emptyDirSync
 } = require('fs-extra');
+const forOwn = require('celia/forOwn');
 
 function resolveExamples(...args) {
   return join(__dirname, '..', 'examples', ...args);
@@ -24,9 +25,7 @@ readdirSync(resolveExamples()).forEach(dir => {
   if (templateName && template) {
     emptyDirSync(resolvePackages(templateName, 'template'));
 
-    delete dependencies.react;
-    delete dependencies['react-dom'];
-    delete dependencies['react-scripts'];
+    dependencies['riant-scripts'] = '^1.1.4';
 
     writeFile(
       resolvePackages(templateName, 'template.json'),
@@ -43,11 +42,8 @@ readdirSync(resolveExamples()).forEach(dir => {
         2
       )
     );
-    Object.keys(template).forEach(key => {
-      copy(
-        resolveExamples(dir, key),
-        resolvePackages(templateName, template[key])
-      );
-    });
+    forOwn(template, (val, key) =>
+      copy(resolveExamples(dir, key), resolvePackages(templateName, val))
+    );
   }
 });
