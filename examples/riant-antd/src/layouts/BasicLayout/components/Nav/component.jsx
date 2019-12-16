@@ -1,5 +1,5 @@
-import React from 'react';
 import Nav from '~/components/Nav';
+import React from 'react';
 import navConfig from '~/config/nav';
 
 function NavBar(props) {

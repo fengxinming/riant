@@ -1,7 +1,7 @@
-import React from 'react';
+import Aside from './components/Aside';
 import { Layout } from 'antd';
 import Nav from './components/Nav';
-import Aside from './components/Aside';
+import React from 'react';
 
 export default function BasicLayout({ children }) {
   return (

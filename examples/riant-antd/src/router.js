@@ -1,9 +1,9 @@
-import { createElement } from 'react';
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
-import { createHashHistory } from 'history';
-import loadable from '@loadable/component';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import { Spin } from 'antd';
+import { createElement } from 'react';
+import { createHashHistory } from 'history';
 import joinPath from 'celia/joinPath';
+import loadable from '@loadable/component';
 import routes from '~/config/routes';
 
 const history = createHashHistory();

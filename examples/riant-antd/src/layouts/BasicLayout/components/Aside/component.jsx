@@ -1,6 +1,6 @@
-import React from 'react';
-import Nav from '~/components/Nav';
 import Logo from '../Logo';
+import Nav from '~/components/Nav';
+import React from 'react';
 import asideConfig from '~/config/aside';
 
 function Aside() {
