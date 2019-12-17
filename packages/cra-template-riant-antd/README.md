@@ -38,6 +38,7 @@ my-app
   ├── package.json
   ├── jsconfig.json
   ├── riant.config.js
+  ├── .eslintrc
   ├── .gitignore
   ├── public
   │   ├── favicon.ico

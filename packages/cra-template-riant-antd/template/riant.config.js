@@ -19,9 +19,7 @@ module.exports = {
       },
       'fix-import-imports'
     ],
-    ['@babel/plugin-proposal-decorators', { legacy: true }],
-    'babel-plugin-transform-jsx-class',
-    'babel-plugin-transform-jsx-condition'
+    ['@babel/plugin-proposal-decorators', { legacy: true }]
   ],
 
   chainWebpack(chainedConfig, env) {
