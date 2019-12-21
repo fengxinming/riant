@@ -111,18 +111,6 @@ module.exports = {
         .prepend(require.resolve('react-app-polyfill/stable'))
         .prepend(require.resolve('react-app-polyfill/ie9'));
 
-      // without filename hashing
-      chainedConfig.output
-        .filename('static/js/[name].js')
-        .chunkFilename('static/js/[name].js');
-      chainedConfig
-        .plugin('MiniCssExtractPlugin')
-        .init((plugin) => {
-          plugin.options.filename = 'static/css/[name].css';
-          plugin.options.chunkFilename = 'static/css/[name].chunk.css';
-          return plugin;
-        });
-
       // without `console.log`
       chainedConfig.optimization.minimizer('TerserPlugin').init((plugin) => {
         plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
@@ -263,6 +251,15 @@ module.exports = {
       jquery: 'jQuery'
     };
   }
+}
+```
+
+#### Attempt to remove hash from filename
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  filenameHashing: false
 }
 ```
 

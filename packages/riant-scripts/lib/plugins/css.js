@@ -13,7 +13,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 module.exports = function (service, projectOptions) {
   service.chainWebpack(function (chain, webpackEnv) {
     // 方便查看依赖的全局配置参数
-    const { css = {} } = projectOptions;
+    const { css } = projectOptions;
 
     const isEnvDevelopment = webpackEnv === 'development';
     const isEnvProduction = webpackEnv === 'production';

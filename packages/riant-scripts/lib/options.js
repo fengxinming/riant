@@ -37,6 +37,7 @@ const compiledSchema = ajv.compile({
     devServer: { instanceof: ['Function', 'Object'] },
     extensions: { instanceof: ['Function', 'Array'] },
     externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
+    filenameHashing: { type: 'boolean' },
     jest: { instanceof: ['Function', 'Object'] },
     paths: { instanceof: ['Function', 'Object'] },
     riantPlugins: { instanceof: 'Array' },
@@ -50,9 +51,6 @@ exports.validate = function (resolved, cb) {
 };
 
 exports.defaults = () => ({
-  // multi-page config
-  pages: undefined,
-
   css: {
     // modules: false,
     // sourceMap: false,
@@ -61,14 +59,20 @@ exports.defaults = () => ({
 
   devServer: {
     /*
-    open: process.platform === 'darwin',
-    host: '0.0.0.0',
-    port: 8080,
-    https: false,
-    hotOnly: false,
-    proxy: null, // string | Object
-    before: app => {}
-  */
+      open: process.platform === 'darwin',
+      host: '0.0.0.0',
+      port: 8080,
+      https: false,
+      hotOnly: false,
+      proxy: null, // string | Object
+      before: app => {}
+    */
+  },
+
+  filenameHashing: true,
+
+  jest(config) {
+    return config;
   }
 });
 

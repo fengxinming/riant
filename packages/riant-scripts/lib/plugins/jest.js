@@ -14,7 +14,7 @@ const { assign } = Object;
  */
 module.exports = function (service, projectOptions) {
   // 方便查看依赖的全局配置参数
-  const { jest = config => config } = projectOptions;
+  const { jest } = projectOptions;
 
   const { reactScriptVersion, reactScriptPath } = service;
 

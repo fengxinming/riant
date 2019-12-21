@@ -104,18 +104,6 @@ module.exports = {
 module.exports = {
   chainWebpack(chainedConfig, env) {
     if (env === 'production') {
-      // 去掉 hash 命名
-      chainedConfig.output
-        .filename('static/js/[name].js')
-        .chunkFilename('static/js/[name].js');
-      chainedConfig
-        .plugin('MiniCssExtractPlugin')
-        .init((plugin) => {
-          plugin.options.filename = 'static/css/[name].css';
-          plugin.options.chunkFilename = 'static/css/[name].chunk.css';
-          return plugin;
-        });
-
       // 移除 `console.log`
       chainedConfig.optimization
         .minimizer('TerserPlugin')
@@ -258,6 +246,15 @@ module.exports = {
       jquery: 'jQuery'
     };
   }
+}
+```
+
+#### 移除文件名 hash
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  filenameHashing: false
 }
 ```
 
