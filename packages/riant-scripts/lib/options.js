@@ -39,6 +39,7 @@ const compiledSchema = ajv.compile({
     externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
     filenameHashing: { type: 'boolean' },
     jest: { instanceof: ['Function', 'Object'] },
+    pages: { type: 'object' },
     paths: { instanceof: ['Function', 'Object'] },
     riantPlugins: { instanceof: 'Array' },
     useEslintrc: { type: 'boolean' }

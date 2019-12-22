@@ -18,6 +18,10 @@ function resolvePackages(...args) {
 
 const { stringify, parse } = JSON;
 
+const { version } = parse(
+  readFileSync(resolvePackages('riant-scripts', 'package.json'), 'utf8')
+);
+
 readdirSync(resolveExamples()).forEach(dir => {
   const { templateName, template, dependencies } = parse(
     readFileSync(resolveExamples(dir, 'package.json'), 'utf8')
@@ -25,7 +29,7 @@ readdirSync(resolveExamples()).forEach(dir => {
   if (templateName && template) {
     emptyDirSync(resolvePackages(templateName, 'template'));
 
-    dependencies['riant-scripts'] = '^1.1.4';
+    dependencies['riant-scripts'] = `^${version}`;
 
     writeFile(
       resolvePackages(templateName, 'template.json'),

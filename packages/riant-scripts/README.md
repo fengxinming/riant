@@ -274,6 +274,19 @@ module.exports = {
 }
 ```
 
+#### multi-page setup
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  pages: {
+    home: 'src/home.js',
+    form: 'src/form.js',
+    notfound: 'src/notfound.js'
+  }
+}
+```
+
 #### Attempt to update paths
 
 ```javascript

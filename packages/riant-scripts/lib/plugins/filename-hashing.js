@@ -12,7 +12,7 @@ module.exports = function (service, projectOptions) {
     const { filenameHashing } = projectOptions;
 
     if (!filenameHashing) {
-      const HASH_RE = /\.\[contenthash:\d+\]/;
+      const HASH_RE = /\.\[[a-z]*hash:\d+\]/;
 
       const { output } = chain;
       output

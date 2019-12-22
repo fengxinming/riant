@@ -10,7 +10,7 @@ Highly configurable development and build tools for react.
 ```bash
 # npm 5.2+
 npx create-react-app my-app --template riant
-# npm 5.2+
+# npm 6+
 npm init react-app my-app --template riant
 # Yarn 0.25+
 yarn create react-app my-app --template riant

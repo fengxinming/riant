@@ -269,6 +269,19 @@ module.exports = {
 }
 ```
 
+#### 配置多页支持
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  pages: {
+    home: 'src/home.js',
+    form: 'src/form.js',
+    notfound: 'src/notfound.js'
+  }
+}
+```
+
 #### 配置内置的 path
 
 ```javascript
