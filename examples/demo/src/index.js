@@ -2,6 +2,9 @@ import './css/index.styl';
 import * as serviceWorker from './serviceWorker';
 import ReactDOM from 'react-dom';
 import router from './router';
+import { sayHi } from './common/utils';
+
+sayHi();
 
 ReactDOM.render(router(), document.getElementById('root'));
 

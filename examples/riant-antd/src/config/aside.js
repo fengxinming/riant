@@ -8,6 +8,11 @@ const asideConfig = [
     text: '表单',
     path: '/form',
     icon: 'form'
+  },
+  {
+    text: '列表',
+    path: '/list',
+    icon: 'unordered-list'
   }
 ];
 

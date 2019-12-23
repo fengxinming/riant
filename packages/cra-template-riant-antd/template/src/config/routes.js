@@ -3,6 +3,7 @@ import NotFound from '~/pages/NotFound';
 
 const Home = () => import('~/pages/Home');
 const Form = () => import('~/pages/Form');
+const List = () => import('~/pages/List');
 
 const routerConfig = [
   {
@@ -16,6 +17,10 @@ const routerConfig = [
       {
         path: '/form',
         componentAsync: Form
+      },
+      {
+        path: '/list',
+        componentAsync: List
       },
       {
         path: '/',

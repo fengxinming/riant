@@ -21,7 +21,9 @@ module.exports = {
       },
       'fix-import-imports'
     ],
-    ['@babel/plugin-proposal-decorators', { legacy: true }]
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    'babel-plugin-transform-jsx-class',
+    'babel-plugin-transform-jsx-condition'
   ],
 
   // 自定义 webpack 配置
@@ -43,32 +45,26 @@ module.exports = {
     }
 
     // code splitting
-    // if (env !== 'test') {
-    //   chainedConfig
-    //     .optimization.splitChunks({
-    //       cacheGroups: {
-    //         vendors: {
-    //           name: `chunk-vendors`,
-    //           test: /[\\/]node_modules[\\/]/,
-    //           priority: -10,
-    //           chunks: 'initial'
-    //         },
-    //         common: {
-    //           name: `chunk-common`,
-    //           minChunks: 2,
-    //           priority: -20,
-    //           chunks: 'initial',
-    //           reuseExistingChunk: true
-    //         }
-    //       }
-    //     });
-    //   chainedConfig
-    //     .plugin('HtmlWebpackPlugin')
-    //     .init((plugin) => {
-    //       plugin.options.chunks = ['chunk-vendors', 'chunk-common', 'main'];
-    //       return plugin;
-    //     });
-    // }
+    if (env !== 'test') {
+      chainedConfig
+        .optimization.splitChunks({
+          cacheGroups: {
+            vendors: {
+              name: `chunk-vendors`,
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              chunks: 'initial'
+            },
+            common: {
+              name: `chunk-common`,
+              minChunks: 2,
+              priority: -20,
+              chunks: 'initial',
+              reuseExistingChunk: true
+            }
+          }
+        });
+    }
   },
 
   // 查找文件的扩展名集合

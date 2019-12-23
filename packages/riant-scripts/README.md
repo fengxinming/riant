@@ -338,6 +338,15 @@ module.exports = {
 }
 ```
 
+#### Add progress bar
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  progressBar: true
+}
+```
+
 #### Add plugins to riant-scripts
 
 ```javascript

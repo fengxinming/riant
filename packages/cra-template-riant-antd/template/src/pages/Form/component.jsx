@@ -76,7 +76,7 @@ const residences = [
 const Nickname = (
   <span>
     昵称&nbsp;
-    <Tooltip title="What do you want others to call you?">
+    <Tooltip title="昵称就是你在网络上的名字">
       <Icon type="question-circle-o" />
     </Tooltip>
   </span>
@@ -199,13 +199,16 @@ function RegistrationForm({ form }) {
                 valuePropName: 'checked'
               })(
                 <Checkbox>
-                  我已阅读 <a>agreement</a>
+                  我已阅读&nbsp;
+                  <a href="/" target="_blank">
+                    协议
+                  </a>
                 </Checkbox>
               )}
             </FormItem>
             <FormItem {...noLabelFormItemLayout}>
               <Button type="primary" htmlType="submit">
-                Register
+                注册
               </Button>
             </FormItem>
           </Form>

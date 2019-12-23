@@ -9,10 +9,6 @@ module.exports = {
   alias: {
     '~': join(__dirname, 'src')
   },
-  
-  babelPlugins(plugins) {
-    console.log(plugins[0][0]);
-  },
 
   chainWebpack(chainedConfig, env) {
     if (env === 'production') {
@@ -27,24 +23,12 @@ module.exports = {
         plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
         return plugin;
       });
-
-      // 移除文件 hash
-      chainedConfig.output
-        .filename('static/js/[name].js')
-        .chunkFilename('static/js/[name].js');
-      chainedConfig
-        .plugin('MiniCssExtractPlugin')
-        .init((plugin) => {
-          plugin.options.filename = 'static/css/[name].css';
-          plugin.options.chunkFilename = 'static/css/[name].chunk.css';
-          return plugin;
-        });
     }
 
     // code splitting
     if (env !== 'test') {
-      chainedConfig
-        .optimization.splitChunks({
+      chainedConfig.optimization
+        .splitChunks({
           cacheGroups: {
             vendors: {
               name: `chunk-vendors`,
@@ -60,12 +44,6 @@ module.exports = {
               reuseExistingChunk: true
             }
           }
-        });
-      chainedConfig
-        .plugin('HtmlWebpackPlugin')
-        .init((plugin) => {
-          plugin.options.chunks = ['chunk-vendors', 'chunk-common', 'main'];
-          return plugin;
         });
     }
   }

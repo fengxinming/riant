@@ -311,6 +311,15 @@ module.exports = {
 }
 ```
 
+#### 增加进度条
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  progressBar: true
+}
+```
+
 #### 增加自定插件至 riant-scripts
 
 ```javascript
