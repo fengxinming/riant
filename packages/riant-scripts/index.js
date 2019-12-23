@@ -17,6 +17,7 @@ module.exports = function (command, options = {}) {
     require('./lib/plugins/externals'),
     require('./lib/plugins/filename-hashing'),
     require('./lib/plugins/pages'),
+    require('./lib/plugins/progress-bar'),
     require('./lib/plugins/use-eslintrc'),
     require('./lib/plugins/chain-webpack'),
     require('./lib/plugins/configure-webpack')

@@ -1,6 +1,6 @@
 {
   "name": "riant-scripts",
-  "version": "1.1.5-1",
+  "version": "1.2.0-0",
   "description": "Configuration and scripts for Create React App.",
   "bin": {
     "riant-scripts": "bin/index.js"
@@ -30,6 +30,7 @@
     "clrsole": "^2.0.0",
     "lodash": "^4.17.15",
     "ora": "^4.0.3",
+    "progress": "^2.0.3",
     "semver": "^6.3.0",
     "webpack-chain": "^6.0.0",
     "webpack-merge": "^4.2.2"

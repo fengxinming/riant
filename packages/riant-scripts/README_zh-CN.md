@@ -15,6 +15,43 @@
 $ npm install riant-scripts --save-dev
 ```
 
+### Schema
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  alias: { instanceof: ['Function', 'Object'] },
+  babelPlugins: { instanceof: ['Function', 'Array'] },
+  chainWebpack: { instanceof: 'Function' },
+  configureWebpack: { instanceof: 'Function' },
+  css: {
+    type: 'object',
+    properties: {
+      modules: { type: 'boolean' },
+      sourceMap: { type: 'boolean' },
+      loaderOptions: {
+        type: 'object',
+        properties: {
+          css: { type: 'object' },
+          less: { type: 'object' },
+          stylus: { type: 'object' },
+          postcss: { type: 'object' }
+        }
+      }
+    }
+  },
+  devServer: { instanceof: ['Function', 'Object'] },
+  extensions: { instanceof: ['Function', 'Array'] },
+  externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
+  filenameHashing: { type: 'boolean' },
+  jest: { instanceof: ['Function', 'Object'] },
+  pages: { type: 'object' },
+  paths: { instanceof: ['Function', 'Object'] },
+  riantPlugins: { instanceof: 'Array' },
+  useEslintrc: { type: 'boolean' }
+}
+```
+
 ### 在根目录中创建一个 riant.config.js 文件
 
 #### 配置别名
@@ -109,34 +146,6 @@ module.exports = {
         .minimizer('TerserPlugin')
         .init((plugin) => {
           plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
-          return plugin;
-        });
-    }
-
-    // code splitting
-    if (env !== 'test') {
-      chainedConfig.optimization
-        .splitChunks({
-          cacheGroups: {
-            vendors: {
-              name: `chunk-vendors`,
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10,
-              chunks: 'initial'
-            },
-            common: {
-              name: `chunk-common`,
-              minChunks: 2,
-              priority: -20,
-              chunks: 'initial',
-              reuseExistingChunk: true
-            }
-          }
-        });
-      chainedConfig
-        .plugin('HtmlWebpackPlugin')
-        .init((plugin) => {
-          plugin.options.chunks = ['chunk-vendors', 'chunk-common', 'main'];
           return plugin;
         });
     }
@@ -326,6 +335,69 @@ module.exports = {
 }
 ```
 
+### 扩展 Webpack 配置
+
+#### 兼容 ie9
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  chainWebpack(chainedConfig, env) {
+    if (env === 'production') {
+      chainedConfig
+        .entry('main')
+        .prepend(require.resolve('react-app-polyfill/stable'))
+        .prepend(require.resolve('react-app-polyfill/ie9'));
+    }
+}
+```
+
+#### 移除 console.log
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  chainWebpack(chainedConfig, env) {
+    if (env === 'production') {
+      chainedConfig.optimization
+        .minimizer('TerserPlugin')
+        .init((plugin) => {
+          plugin.options.terserOptions.compress.pure_funcs = ['console.log'];
+          return plugin;
+        });
+    }
+}
+```
+
+#### 代码拆分
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  chainWebpack(chainedConfig, env) {
+    if (env !== 'test') {
+      chainedConfig.optimization
+        .splitChunks({
+          cacheGroups: {
+            vendors: {
+              name: `chunk-vendors`,
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              chunks: 'initial'
+            },
+            common: {
+              name: `chunk-common`,
+              minChunks: 2,
+              priority: -20,
+              chunks: 'initial',
+              reuseExistingChunk: true
+            }
+          }
+        });
+    }
+}
+```
+
 ### 代码结构
 
 ```
@@ -365,39 +437,4 @@ $ npm start
 
 ```bash
 $ npm run build
-```
-
-## Schema
-
-```javascript
-/* riant.config.js */
-module.exports = {
-  alias: { instanceof: ['Function', 'Object'] },
-  babelPlugins: { instanceof: ['Function', 'Array'] },
-  chainWebpack: { instanceof: 'Function' },
-  configureWebpack: { instanceof: 'Function' },
-  css: {
-    type: 'object',
-    properties: {
-      modules: { type: 'boolean' },
-      sourceMap: { type: 'boolean' },
-      loaderOptions: {
-        type: 'object',
-        properties: {
-          css: { type: 'object' },
-          less: { type: 'object' },
-          stylus: { type: 'object' },
-          postcss: { type: 'object' }
-        }
-      }
-    }
-  },
-  devServer: { instanceof: ['Function', 'Object'] },
-  extensions: { instanceof: ['Function', 'Array'] },
-  externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
-  jest: { instanceof: ['Function', 'Object'] },
-  paths: { instanceof: ['Function', 'Object'] },
-  riantPlugins: { instanceof: 'Array' },
-  useEslintrc: { type: 'boolean' }
-}
 ```

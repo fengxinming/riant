@@ -41,6 +41,7 @@ const compiledSchema = ajv.compile({
     jest: { instanceof: ['Function', 'Object'] },
     pages: { type: 'object' },
     paths: { instanceof: ['Function', 'Object'] },
+    progressBar: { type: ['boolean', 'object'] },
     riantPlugins: { instanceof: 'Array' },
     useEslintrc: { type: 'boolean' }
   }
