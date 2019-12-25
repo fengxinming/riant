@@ -74,6 +74,9 @@ module.exports = {
       .add('.js');
   },
 
+  // 进度条
+  progressBar: true,
+
   // 使用 eslintrc 文件
   useEslintrc: true
 };

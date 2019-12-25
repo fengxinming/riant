@@ -18,12 +18,14 @@ module.exports = function (service, projectOptions) {
       output
         .filename(output.get('filename').replace(HASH_RE, ''))
         .chunkFilename(output.get('chunkFilename').replace(HASH_RE, ''));
-      chain.plugin('MiniCssExtractPlugin').init((plugin) => {
-        const { options } = plugin;
-        options.filename = options.filename.replace(HASH_RE, '');
-        options.chunkFilename = options.chunkFilename.replace(HASH_RE, '');
-        return plugin;
-      });
+      chain
+        .plugin('MiniCssExtractPlugin')
+        .init((plugin) => {
+          const { options } = plugin;
+          options.filename = options.filename.replace(HASH_RE, '');
+          options.chunkFilename = options.chunkFilename.replace(HASH_RE, '');
+          return plugin;
+        });
     }
   });
 };

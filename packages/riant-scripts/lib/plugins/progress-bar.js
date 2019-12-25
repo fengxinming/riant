@@ -10,7 +10,7 @@ const defaults = {
   options: {
     complete: chalk.bgGreen(' '),
     incomplete: chalk.bgWhite(' '),
-    width: 40,
+    width: 20,
     total: 100,
     clear: false
   }
@@ -35,14 +35,14 @@ module.exports = function (service, projectOptions) {
       const { template, options } = progressBar;
       const bar = new Progress(
         template || defaults.template,
-        Object.assign({}, options, defaults.options)
+        Object.assign({}, defaults.options, options)
       );
 
       chain
         .plugin('progressBar')
         .before('HtmlWebpackPlugin')
         .use(new ProgressPlugin(function (percentage, msg, moduleProgress, activeModules, moduleName) {
-          bar.update(percentage, { msg: `${msg} ${moduleProgress} ${activeModules}` });
+          bar.update(percentage, { msg: percentage === 1 ? msg : `${msg} ${moduleProgress || ''} ${activeModules || ''}` });
         }));
     }
   });

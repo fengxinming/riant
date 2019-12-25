@@ -29,6 +29,15 @@ module.exports = {
   // 自定义 webpack 配置
   chainWebpack(chainedConfig, env) {
     if (env === 'production') {
+      // 移除警告
+      chainedConfig
+        .plugin('MiniCssExtractPlugin')
+        .init((plugin) => {
+          const { options } = plugin;
+          options.ignoreOrder = true;
+          return plugin;
+        });
+
       // 移除 console.log
       chainedConfig.optimization
         .minimizer('TerserPlugin')
@@ -73,6 +82,9 @@ module.exports = {
       .clear()
       .add('.js');
   },
+
+  // 进度条
+  progressBar: true,
 
   // 使用 eslintrc 文件
   useEslintrc: true

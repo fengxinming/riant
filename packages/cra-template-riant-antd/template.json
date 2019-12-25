@@ -9,6 +9,7 @@
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-transform-jsx-class": "^0.1.2",
     "babel-plugin-transform-jsx-condition": "^0.1.2",
+    "babel-runtime-jsx-plus": "^0.1.4",
     "react-app-polyfill": "^1.0.5",
     "react-router-dom": "^5.1.2",
     "stylus": "^0.54.7",
