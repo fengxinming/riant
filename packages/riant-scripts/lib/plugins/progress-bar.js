@@ -1,20 +1,7 @@
 'use strict';
 
-const { ProgressPlugin } = require('webpack');
-const chalk = require('chalk');
-const Progress = require('progress');
+const CliProgressPlugin = require('cli-progress-webpack-plugin');
 const { isObject } = require('../utils');
-
-const defaults = {
-  template: `:bar ${chalk.green(':percent')} :msg`,
-  options: {
-    complete: chalk.bgGreen(' '),
-    incomplete: chalk.bgWhite(' '),
-    width: 20,
-    total: 100,
-    clear: false
-  }
-};
 
 /**
  * 处理自定义配置 progressBar
@@ -32,18 +19,10 @@ module.exports = function (service, projectOptions) {
     }
 
     if (isObject(progressBar)) {
-      const { template, options } = progressBar;
-      const bar = new Progress(
-        template || defaults.template,
-        Object.assign({}, defaults.options, options)
-      );
-
       chain
         .plugin('progressBar')
         .before('HtmlWebpackPlugin')
-        .use(new ProgressPlugin(function (percentage, msg, moduleProgress, activeModules, moduleName) {
-          bar.update(percentage, { msg: percentage === 1 ? msg : `${msg} ${moduleProgress || ''} ${activeModules || ''}` });
-        }));
+        .use(new CliProgressPlugin(progressBar));
     }
   });
 };

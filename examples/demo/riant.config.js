@@ -77,7 +77,9 @@ module.exports = {
   useEslintrc: true,
 
   // 增加进度条
-  progressBar: true,
+  progressBar: {
+    profile: true
+  },
 
   // 多页
   pages: {
