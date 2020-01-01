@@ -7,7 +7,7 @@ const { isArray } = Array;
 const { assign } = Object;
 
 /**
- * 处理自定义配置 alias
+ * 处理自定义配置 jest
  *
  * @param {Service} service
  * @param {Object} projectOptions

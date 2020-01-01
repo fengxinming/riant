@@ -54,7 +54,7 @@ module.exports = {
 
 ### Create a riant.config.js file in the root directory
 
-#### Create aliases to import or require certain modules more easily
+* **Create aliases to import or require certain modules more easily**
 
 ```javascript
 /* riant.config.js */
@@ -74,7 +74,7 @@ module.exports = {
 }
 ```
 
-#### Add plugins to Babel
+* **Add plugins to Babel**
 
 ```javascript
 /* riant.config.js */
@@ -135,7 +135,7 @@ module.exports = {
 }
 ```
 
-#### Customize Webpack config
+* **Customize Webpack config**
 
 ```javascript
 /* riant.config.js */
@@ -198,7 +198,7 @@ module.exports = {
 }
 ```
 
-#### Customize style loader options
+* **Customize style loader options**
 
 ```javascript
 /* riant.config.js */
@@ -215,7 +215,7 @@ module.exports = {
 }
 ```
 
-#### Customize Dev Server config
+* **Customize Dev Server config**
 
 ```javascript
 /* riant.config.js */
@@ -245,7 +245,7 @@ module.exports = {
 }
 ```
 
-#### Attempt to resolve these extensions in order
+* **Attempt to resolve these extensions in order**
 
 ```javascript
 /* riant.config.js */
@@ -263,7 +263,7 @@ module.exports = {
 }
 ```
 
-#### Prevent bundling of certain imported packages and instead retrieve these external dependencies at runtime
+* **Prevent bundling of certain imported packages and instead retrieve these external dependencies at runtime**
 
 ```javascript
 /* riant.config.js */
@@ -285,7 +285,7 @@ module.exports = {
 }
 ```
 
-#### Attempt to remove hash from filename
+* **Attempt to remove hash from filename**
 
 ```javascript
 /* riant.config.js */
@@ -294,7 +294,7 @@ module.exports = {
 }
 ```
 
-#### Attempt to update jest config
+* **Attempt to update jest config**
 
 ```javascript
 /* riant.config.js */
@@ -305,7 +305,7 @@ module.exports = {
 }
 ```
 
-#### multi-page setup
+* **multi-page setup**
 
 ```javascript
 /* riant.config.js */
@@ -318,7 +318,7 @@ module.exports = {
 }
 ```
 
-#### Attempt to update paths
+* **Attempt to update paths**
 
 ```javascript
 /* riant.config.js */
@@ -338,7 +338,7 @@ module.exports = {
 }
 ```
 
-#### Add progress bar
+* **Add progress bar**
 
 ```javascript
 /* riant.config.js */
@@ -347,7 +347,7 @@ module.exports = {
 }
 ```
 
-#### Add plugins to riant-scripts
+* **Add plugins to riant-scripts**
 
 ```javascript
 /* riant.config.js */
@@ -362,7 +362,7 @@ module.exports = {
 
 [plugins reference](lib/plugins)
 
-#### Use eslintrc
+* **Use eslintrc**
 
 ```javascript
 /* riant.config.js */
@@ -373,7 +373,7 @@ module.exports = {
 
 ### Extended Webpack Configuration
 
-#### supporting Internet Explorer 9
+* **supporting Internet Explorer 9**
 
 ```javascript
 /* riant.config.js */
@@ -388,7 +388,7 @@ module.exports = {
 }
 ```
 
-#### without console.log
+* **without console.log**
 
 ```javascript
 /* riant.config.js */
@@ -405,7 +405,7 @@ module.exports = {
 }
 ```
 
-#### code splitting
+* **code splitting**
 
 ```javascript
 /* riant.config.js */

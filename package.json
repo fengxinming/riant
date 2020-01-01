@@ -1,7 +1,10 @@
 {
   "private": true,
   "name": "riant",
-  "version": "1.0.0",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
     "example:demo": "lerna run --scope demo",
