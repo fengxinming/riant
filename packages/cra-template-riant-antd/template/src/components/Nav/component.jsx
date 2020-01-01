@@ -51,7 +51,7 @@ function Nav({ className, mode, theme, items }) {
       className={className}
       mode={mode || 'inline'}
       theme={theme || 'light'}
-      selectedKeys={[pathname]}
+      selectedKeys={[ pathname ]}
     >
       {createMenu(items)}
     </Menu>

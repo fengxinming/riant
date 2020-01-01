@@ -82,11 +82,11 @@ const Nickname = (
   </span>
 );
 
-const websiteSuffix = ['.com', '.org', '.net'];
+const websiteSuffix = [ '.com', '.org', '.net' ];
 
 function RegistrationForm({ form }) {
   const { getFieldDecorator, validateFieldsAndScroll } = form;
-  const [website, setWebsite] = useState('');
+  const [ website, setWebsite ] = useState('');
 
   const currentWebsiteOptions = useMemo(() => {
     return website
@@ -95,7 +95,7 @@ function RegistrationForm({ form }) {
           return <AutoCompleteOption key={suffix}>{suffix}</AutoCompleteOption>;
         })
       : [];
-  }, [website]);
+  }, [ website ]);
 
   const PhoneCode = useMemo(() => {
     getFieldDecorator('phoneCode', {
@@ -106,7 +106,7 @@ function RegistrationForm({ form }) {
         <SelectOption value="87">+87</SelectOption>
       </Select>
     );
-  }, [getFieldDecorator]);
+  }, [ getFieldDecorator ]);
 
   const onSubmit = useCallback(
     e => {
@@ -117,7 +117,7 @@ function RegistrationForm({ form }) {
         }
       });
     },
-    [validateFieldsAndScroll]
+    [ validateFieldsAndScroll ]
   );
 
   return (
@@ -141,12 +141,12 @@ function RegistrationForm({ form }) {
             </FormItem>
             <FormItem label="密码">
               {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码' }]
+                rules: [ { required: true, message: '请输入密码' } ]
               })(<Input />)}
             </FormItem>
             <FormItem label="确认密码">
               {getFieldDecorator('confirm', {
-                rules: [{ required: true, message: '请输入确认密码' }]
+                rules: [ { required: true, message: '请输入确认密码' } ]
               })(<Input />)}
             </FormItem>
             <FormItem label={Nickname}>
@@ -158,7 +158,7 @@ function RegistrationForm({ form }) {
             </FormItem>
             <FormItem label="区域">
               {getFieldDecorator('area', {
-                initialValue: ['zhejiang', 'hangzhou', 'xihu'],
+                initialValue: [ 'zhejiang', 'hangzhou', 'xihu' ],
                 rules: [
                   { type: 'array', required: true, message: '请选择区域' }
                 ]
@@ -166,12 +166,12 @@ function RegistrationForm({ form }) {
             </FormItem>
             <FormItem label="手机号码">
               {getFieldDecorator('phone', {
-                rules: [{ required: true, message: '请输入手机号码' }]
+                rules: [ { required: true, message: '请输入手机号码' } ]
               })(<Input addonBefore={PhoneCode} style={{ width: '100%' }} />)}
             </FormItem>
             <FormItem label="主页">
               {getFieldDecorator('website', {
-                rules: [{ required: true, message: '请输入主页网址' }]
+                rules: [ { required: true, message: '请输入主页网址' } ]
               })(
                 <AutoComplete
                   dataSource={currentWebsiteOptions}
@@ -186,7 +186,7 @@ function RegistrationForm({ form }) {
               <Row gutter={8}>
                 <Col span={12}>
                   {getFieldDecorator('captcha', {
-                    rules: [{ required: true, message: '请输入验证码' }]
+                    rules: [ { required: true, message: '请输入验证码' } ]
                   })(<Input />)}
                 </Col>
                 <Col span={12}>

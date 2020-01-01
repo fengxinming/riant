@@ -46,7 +46,7 @@ function createRoute(ReactComponent, props, routes, parentRoute) {
               others.path = path && joinPath(parentRoute.path || '', path);
 
               if (children) {
-                others.render = function(props) {
+                others.render = function (props) {
                   return createRoute(
                     RouteComponent,
                     { key: rckey, ...props },
@@ -65,6 +65,6 @@ function createRoute(ReactComponent, props, routes, parentRoute) {
   );
 }
 
-export default function() {
+export default function () {
   return createRoute(Router, { history }, routes, { key: 'route' });
 }

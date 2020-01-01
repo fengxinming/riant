@@ -1,0 +1,108 @@
+{
+  "defer": 100,
+  "res": {
+    "page": {},
+    "items": [
+      {
+        "id": 10000,
+        "name": "user-0",
+        "gender": "男",
+        "city": "城市-0",
+        "sign": "签名-0",
+        "integral": 54,
+        "occupation": "科学家",
+        "wealth": 921905
+      },
+      {
+        "id": 10001,
+        "name": "user-1",
+        "gender": "男",
+        "city": "城市-1",
+        "sign": "签名-1",
+        "integral": 83,
+        "occupation": "医生",
+        "wealth": 278910
+      },
+      {
+        "id": 10002,
+        "name": "user-2",
+        "gender": "女",
+        "city": "城市-2",
+        "sign": "签名-2",
+        "integral": 51,
+        "occupation": "作家",
+        "wealth": 850145
+      },
+      {
+        "id": 10003,
+        "name": "user-3",
+        "gender": "女",
+        "city": "城市-3",
+        "sign": "签名-3",
+        "integral": 6,
+        "occupation": "科学家",
+        "wealth": 459200
+      },
+      {
+        "id": 10004,
+        "name": "user-4",
+        "gender": "男",
+        "city": "城市-4",
+        "sign": "签名-4",
+        "integral": 9,
+        "occupation": "医生",
+        "wealth": 169326
+      },
+      {
+        "id": 10005,
+        "name": "user-5",
+        "gender": "女",
+        "city": "城市-5",
+        "sign": "签名-5",
+        "integral": 0,
+        "occupation": "作家",
+        "wealth": 879696
+      },
+      {
+        "id": 10006,
+        "name": "user-6",
+        "gender": "女",
+        "city": "城市-6",
+        "sign": "签名-6",
+        "integral": 93,
+        "occupation": "诗人",
+        "wealth": 544267
+      },
+      {
+        "id": 10007,
+        "name": "user-7",
+        "gender": "男",
+        "city": "城市-7",
+        "sign": "签名-7",
+        "integral": 15,
+        "occupation": "作家",
+        "wealth": 118772
+      },
+      {
+        "id": 10008,
+        "name": "user-8",
+        "gender": "男",
+        "city": "城市-8",
+        "sign": "签名-8",
+        "integral": 91,
+        "occupation": "诗人",
+        "wealth": 452844
+      },
+      {
+        "id": 10009,
+        "name": "user-9",
+        "gender": "女",
+        "city": "城市-9",
+        "sign": "签名-9",
+        "integral": 45,
+        "occupation": "诗人",
+        "wealth": 431794
+      }
+    ]
+  }
+}

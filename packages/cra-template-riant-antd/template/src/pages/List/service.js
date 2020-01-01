@@ -1,6 +1,6 @@
 import sleep from 'celia/sleep';
 
-export const columns = [{
+export const columns = [ {
   dataIndex: 'name',
   title: '姓名'
 },{
@@ -21,7 +21,7 @@ export const columns = [{
 },{
   dataIndex: 'wealth',
   title: '财富'
-}];
+} ];
 
 export function query() {
   return sleep(400).then(() => ({
@@ -48,12 +48,12 @@ function repeat(obj, times = 1) {
     const n = Object.assign({}, obj);
     n.id += i;
     n.name = `${n.name}-${i}`;
-    n.gender = ['男', '女'][Math.round(Math.random() * n.gender)];
+    n.gender = [ '男', '女' ][Math.round(Math.random() * n.gender)];
     n.city = `${n.city}-${i}`;
     n.sign = `${n.sign}-${i}`;
     n.integral = Math.random() * n.integral >>> 0;
     n.wealth = Math.random() * n.wealth >>> 0;
-    n.occupation = ['作家', '诗人', '科学家', '医生'][
+    n.occupation = [ '作家', '诗人', '科学家', '医生' ][
       (Math.random() * 4) >>> 0
     ];
     arr[i] = n;

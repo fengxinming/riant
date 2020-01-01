@@ -4,7 +4,10 @@
     "--no-lockfile"
   ],
   "version": "independent",
-  "useWorkspaces": true,
+  "packages": [
+    "packages/*",
+    "examples/*"
+  ],
   "changelog": {
     "repo": "react-hobby/riant",
     "cacheDir": ".changelog",

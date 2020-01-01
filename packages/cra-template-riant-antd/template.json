@@ -10,10 +10,13 @@
     "babel-plugin-transform-jsx-class": "^0.1.2",
     "babel-plugin-transform-jsx-condition": "^0.1.2",
     "babel-runtime-jsx-plus": "^0.1.4",
+    "cli-simple-progress": "^1.0.0",
     "react-app-polyfill": "^1.0.5",
     "react-router-dom": "^5.1.2",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
+    "tammy": "^1.1.4",
+    "tammy-adapter-xhr": "^1.0.2",
     "riant-scripts": "^1.2.0-3"
   },
   "scripts": {

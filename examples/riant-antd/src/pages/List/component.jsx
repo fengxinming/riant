@@ -1,28 +1,31 @@
 import { Col, DatePicker, Form, Input, Row, Table } from 'antd';
-import React, { useCallback, useEffect, useState } from 'react';
-import { columns, query } from './service';
+import React, { useEffect, useCallback } from 'react';
+import useFetchData from '~/hooks/useFetchData';
+import { columns } from './service';
 
 const { RangePicker } = DatePicker;
 const { Search } = Input;
 
 function Order() {
-  const [loading, setLoading] = useState(false);
-  const [ds, setDS] = useState([]);
-  const onSearch = useCallback(value => {
-    setLoading(true);
-    query().then(({ items }) => {
-      setDS(items);
-      setLoading(false);
-    });
-  }, []);
+  const [ { data:{ items }, loading }, fetch ] = useFetchData({
+    url: '/list',
+    mock: true
+  }, {});
+
+  const onSearch = useCallback((value)=> {
+    fetch({ keyword: value });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
   useEffect(() => {
-    onSearch();
-  }, [onSearch]);
+    fetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="basic-layout-container page-order">
       <Form className="page-order-condition">
-        <Row gutter={[16, 16]}>
+        <Row gutter={[ 16, 16 ]}>
           <Col span={12}>
             <RangePicker />
           </Col>
@@ -38,7 +41,7 @@ function Order() {
       <div className="page-order-table">
         <Table
           columns={columns}
-          dataSource={ds}
+          dataSource={items}
           loading={loading}
           rowKey="id"
         />
