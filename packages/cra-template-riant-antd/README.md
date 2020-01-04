@@ -40,18 +40,23 @@ my-app
   ├── riant.config.js
   ├── .eslintrc
   ├── .gitignore
+  ├── .env.production
   ├── public
   │   ├── favicon.ico
   │   ├── index.html
   │   └── manifest.json
   └── src
+      ├── commons
       ├── components
       ├── config
-      ├── css
+      ├── hooks
       ├── layouts
+      ├── mock
       ├── pages
+      ├── styles
       ├── index.js
       ├── router.js
       ├── serviceWorker.js
+      ├── setupProxy.js
       └── setupTests.js
 ```

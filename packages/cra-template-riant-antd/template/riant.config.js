@@ -84,7 +84,12 @@ module.exports = {
   },
 
   // 进度条
-  progressBar: true,
+  progressBar: {
+    profile: true
+  },
+
+  // 多进程打包
+  parallel: true,
 
   // 使用 eslintrc 文件
   useEslintrc: true

@@ -1,0 +1,15 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "jsx-a11y/anchor-is-valid": "off",
+    "semi": "error",
+    "quotes": ["error", "single"],
+    "object-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "always"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }]
+  }
+}

@@ -46,6 +46,7 @@ module.exports = {
   filenameHashing: { type: 'boolean' },
   jest: { instanceof: ['Function', 'Object'] },
   pages: { type: 'object' },
+  parallel: { type: ['boolean', 'number'] },
   paths: { instanceof: ['Function', 'Object'] },
   riantPlugins: { instanceof: 'Array' },
   useEslintrc: { type: 'boolean' }
@@ -311,6 +312,15 @@ module.exports = {
 }
 ```
 
+#### 为 Babel 或 TypeScript 使用 thread-loader，仅作用于生产构建
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  parallel: true
+}
+```
+
 #### 增加进度条
 
 ```javascript
@@ -405,6 +415,21 @@ module.exports = {
         });
     }
 }
+```
+
+### 在根目录中创建一个 .env.production 文件
+
+* **打包相关设置**
+
+```env
+# 是否生成 .map 文件
+GENERATE_SOURCEMAP=false
+
+# 是否把 runtime chunk 生成到 html 模板中
+INLINE_RUNTIME_CHUNK=false
+
+# 编码图片的大小限制
+IMAGE_INLINE_SIZE_LIMIT=30000
 ```
 
 ### 代码结构

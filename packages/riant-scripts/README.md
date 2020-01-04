@@ -46,6 +46,7 @@ module.exports = {
   filenameHashing: { type: 'boolean' },
   jest: { instanceof: ['Function', 'Object'] },
   pages: { type: 'object' },
+  parallel: { type: ['boolean', 'number'] },
   paths: { instanceof: ['Function', 'Object'] },
   riantPlugins: { instanceof: 'Array' },
   useEslintrc: { type: 'boolean' }
@@ -338,6 +339,15 @@ module.exports = {
 }
 ```
 
+* **use thread-loader for Babel or TypeScript transpilation**
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  parallel: true
+}
+```
+
 * **Add progress bar**
 
 ```javascript
@@ -432,6 +442,20 @@ module.exports = {
         });
     }
 }
+```
+
+### Create .env.production file in the root directory
+
+* **Set env for production**
+
+```env
+# Source maps are resource heavy and can cause out of memory issue for large source files.
+GENERATE_SOURCEMAP=false
+
+# Some apps do not need the benefits of saving a web request, so not inlining the chunk makes for a smoother build process.
+INLINE_RUNTIME_CHUNK=false
+
+IMAGE_INLINE_SIZE_LIMIT=30000
 ```
 
 ### Code Structure

@@ -17,7 +17,7 @@
     "stylus-loader": "^3.0.2",
     "tammy": "^1.1.4",
     "tammy-adapter-xhr": "^1.0.2",
-    "riant-scripts": "^1.2.0-3"
+    "riant-scripts": "^1.2.0"
   },
   "scripts": {
     "start": "riant-scripts start",

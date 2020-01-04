@@ -40,6 +40,7 @@ const compiledSchema = ajv.compile({
     filenameHashing: { type: 'boolean' },
     jest: { instanceof: ['Function', 'Object'] },
     pages: { type: 'object' },
+    parallel: { type: ['boolean', 'number'] },
     paths: { instanceof: ['Function', 'Object'] },
     progressBar: { type: ['boolean', 'object'] },
     riantPlugins: { instanceof: 'Array' },
@@ -71,11 +72,13 @@ exports.defaults = () => ({
     */
   },
 
-  filenameHashing: true,
+  filenameHashing: true, // 默认开启文件hash
 
   jest(config) {
     return config;
-  }
+  },
+
+  parallel: false // 默认关闭 thread-loader
 });
 
 function filterErrors(errors) {

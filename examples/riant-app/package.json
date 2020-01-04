@@ -35,5 +35,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "templateName": "cra-template-riant",
+  "template": {
+    "public": "template/public",
+    "src": "template/src",
+    "jsconfig.json": "template/jsconfig.json",
+    "README.md": "template/README.md",
+    "riant.config.js": "template/riant.config.js",
+    ".gitignore": "template/gitignore",
+    ".eslintrc": "template/.eslintrc",
+    ".env.production": "template/.env.production"
   }
 }

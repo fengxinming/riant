@@ -18,6 +18,7 @@ module.exports = function (service, projectOptions) {
       .module
       .rule('main')
       .oneOf('babel')
+      .use('babel-loader')
       .get('options');
 
     if (isFunction(babelPlugins)) {

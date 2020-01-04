@@ -11,14 +11,15 @@ module.exports = function (command, options = {}) {
   let plugins = [
     require('./lib/plugins/paths'),
     require('./lib/plugins/alias'),
+    require('./lib/plugins/parallel'),
     require('./lib/plugins/babel-plugins'),
     require('./lib/plugins/css'),
     require('./lib/plugins/extensions'),
     require('./lib/plugins/externals'),
     require('./lib/plugins/filename-hashing'),
     require('./lib/plugins/pages'),
-    require('./lib/plugins/progress-bar'),
     require('./lib/plugins/use-eslintrc'),
+    require('./lib/plugins/progress-bar'),
     require('./lib/plugins/chain-webpack'),
     require('./lib/plugins/configure-webpack')
   ];

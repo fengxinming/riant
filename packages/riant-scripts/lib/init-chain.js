@@ -81,7 +81,7 @@ function chainModule(chainableModule, moduleConfig) {
         // console.log('childRuleName => ', childRuleName);
         switch (childRuleName) {
           case 'babel':
-            mergeRule(
+            normalizeRule(
               chainableMainRule.oneOf(
                 childRuleConfig.exclude ? 'babel-outside' : 'babel'
               ),
@@ -153,6 +153,26 @@ function mergeRule(chainableRule, ruleConfig) {
       chainableRule
         .use(getLoaderName(loaderConfig))[isObject(loaderConfig) ? 'merge' : 'loader'](loaderConfig)
     );
+}
+
+function normalizeRule(chainableRule, ruleConfig) {
+  // 配置了loader，未配置use，需要统一成use
+  const loaderConfig = ruleConfig.loader;
+  if (loaderConfig && !ruleConfig.use) {
+    const chainableLoader = chainableRule
+      .use(getLoaderName(loaderConfig))
+      .loader(loaderConfig);
+    const options = ruleConfig.options || ruleConfig.query;
+    if (options) {
+      chainableLoader.options(options);
+    }
+    chainableRule.merge(ruleConfig, ['loader', 'options', 'query', 'test', 'include', 'exclude']);
+    add(chainableRule.exclude, ruleConfig.exclude);
+    add(chainableRule.include, ruleConfig.include);
+    ruleConfig.test && chainableRule.test(ruleConfig.test);
+  } else {
+    mergeRule(chainableRule, ruleConfig);
+  }
 }
 
 function getLastLoader(use) {
