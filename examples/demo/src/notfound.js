@@ -1,4 +1,4 @@
-import './css/index.styl';
+import './styles/index.styl';
 import * as serviceWorker from './serviceWorker';
 import NotFound from './pages/NotFound';
 import React from 'react';

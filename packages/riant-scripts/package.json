@@ -1,6 +1,6 @@
 {
   "name": "riant-scripts",
-  "version": "1.2.0",
+  "version": "1.3.0-0",
   "description": "Configuration and scripts for Create React App.",
   "bin": {
     "riant-scripts": "bin/index.js"
@@ -25,6 +25,7 @@
   "dependencies": {
     "ajv": "^6.10.2",
     "ajv-keywords": "^3.4.1",
+    "cache-loader": "^4.1.0",
     "celia": "^6.1.4",
     "chalk": "^3.0.0",
     "cli-progress-webpack-plugin": "^1.0.0",

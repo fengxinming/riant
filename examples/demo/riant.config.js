@@ -63,6 +63,12 @@ module.exports = {
           }
         });
     }
+    // console.log(
+    //   require('util').inspect(
+    //   chainedConfig.module
+    //   .rule('main')
+    //   .oneOf('babel')
+    //   .toConfig(), {depth: 6}));
   },
 
   // 查找文件的扩展名集合
@@ -87,6 +93,8 @@ module.exports = {
     form: 'src/form.js',
     notfound: 'src/notfound.js'
   },
+
+  // parallel: true,
 
   // 代理
   devServer: {

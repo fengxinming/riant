@@ -3,6 +3,7 @@
   "name": "riant",
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
+    "install": "tyarn install --no-lockfile && lerna bootstrap",
     "example:demo": "lerna run --scope demo",
     "example:rom": "lerna run --scope riant-order-management",
     "example:ra": "lerna run --scope riant-antd",
@@ -28,10 +29,5 @@
     "eslint-plugin-standard": "^4.0.1",
     "lerna": "^3.19.0",
     "lerna-changelog": "^0.8.3"
-  },
-  "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^3.3.0"
   }
 }

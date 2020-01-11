@@ -17,6 +17,11 @@
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2"
   },
+  "devDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
+  },
   "scripts": {
     "start": "node ../../packages/riant-scripts/bin start",
     "build": "node ../../packages/riant-scripts/bin build",

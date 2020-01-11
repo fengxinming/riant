@@ -1,7 +1,8 @@
 'use strict';
 
-const { cpus } = require('os');
-const threadLoader = require('thread-loader');
+const { cpus, tmpdir } = require('os');
+const findCacheDir = require('find-cache-dir');
+
 const { isNumber } = require('../utils');
 
 /**
@@ -24,17 +25,17 @@ module.exports = function (service, projectOptions) {
     }
 
     if (useThreads) {
-      threadLoader.warmup({
-        // 线程池参数
-        workers: isNumber(parallel) ? parallel : undefined
-      }, [
-        // 模块被加载
-        'babel-loader'
-      ]);
       ['babel', 'babel-outside'].forEach(function (ruleName) {
-        const threadLoaderConfig = chain.module
+        const babelRule = chain.module
           .rule('main')
-          .oneOf(ruleName)
+          .oneOf(ruleName);
+
+        const babelOptions = babelRule
+          .use('babel-loader')
+          .get('options');
+        babelOptions.cacheDirectory = false;
+
+        const threadLoaderConfig = babelRule
           .use('thread-loader')
           .loader(require.resolve('thread-loader'))
           .before('babel-loader');
@@ -42,14 +43,25 @@ module.exports = function (service, projectOptions) {
         if (isNumber(parallel)) {
           threadLoaderConfig.options({ workers: parallel });
         }
-      });
 
-      chain.optimization
-        .minimizer('TerserPlugin')
-        .init((plugin) => {
-          plugin.options.parallel = parallel;
-          return plugin;
-        });
+        babelRule
+          .use('cache-loader')
+          .loader(require.resolve('cache-loader'))
+          .options({
+            cacheIdentifier: babelOptions.cacheIdentifier,
+            cacheDirectory: findCacheDir({
+              name: 'babel-loader'
+            }) || tmpdir()
+          })
+          .before('thread-loader');
+
+        chain.optimization
+          .minimizer('TerserPlugin')
+          .init((plugin) => {
+            plugin.options.parallel = parallel;
+            return plugin;
+          });
+      });
     }
 
   });
