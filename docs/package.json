@@ -1,0 +1,15 @@
+{
+  "name": "riant-docs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Highly configurable development and build tools for react.",
+  "scripts": {
+    "dev": "vuepress dev .",
+    "build": "vuepress build ."
+  },
+  "author": "Jesse Feng",
+  "license": "ISC",
+  "dependencies": {
+    "vuepress": "^1.2.0"
+  }
+}

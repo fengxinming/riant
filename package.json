@@ -3,7 +3,7 @@
   "name": "riant",
   "description": "Highly configurable development and build tools for react.",
   "scripts": {
-    "install": "tyarn install --no-lockfile && lerna bootstrap",
+    "bootstrap": "tyarn install --no-lockfile && lerna bootstrap",
     "example:demo": "lerna run --scope demo",
     "example:rom": "lerna run --scope riant-order-management",
     "example:ra": "lerna run --scope riant-antd",
