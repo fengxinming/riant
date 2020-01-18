@@ -21,7 +21,9 @@ module.exports = {
       },
       'fix-import-imports'
     ],
-    ['@babel/plugin-proposal-decorators', { legacy: true }]
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    'babel-plugin-transform-jsx-class',
+    'babel-plugin-transform-jsx-condition'
   ],
 
   // 自定义 webpack 配置
@@ -71,6 +73,10 @@ module.exports = {
     //   .toConfig(), {depth: 6}));
   },
 
+  define: {
+    __version__: JSON.stringify('1.0.0')
+  },
+
   // 查找文件的扩展名集合
   extensions(chainedSet) {
     chainedSet.clear().add('.js');
@@ -89,6 +95,7 @@ module.exports = {
 
   // 多页
   pages: {
+    index: 'src/index.js',
     home: 'src/home.js',
     form: 'src/form.js',
     notfound: 'src/notfound.js'
@@ -101,6 +108,7 @@ module.exports = {
     historyApiFallback: {
       disableDotRule: true,
       rewrites: [
+        { from: /^\/index/, to: '/index.html' },
         { from: /^\/home/, to: '/home.html' },
         { from: /^\/form/, to: '/form.html' },
         { from: /^\/notfound/, to: '/notfound.html' }

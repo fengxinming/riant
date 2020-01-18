@@ -123,6 +123,11 @@ function chainModule(chainableModule, moduleConfig) {
  * @param {Object} pluginConfig
  */
 function chainPlugins(webpackChain, pluginConfig) {
+  // 用于挂在插件到首个
+  webpackChain
+    .plugin('noop')
+    .use(new NoopPlugin());
+
   pluginConfig.forEach((n, i) => {
     const { name } = n.constructor;
     webpackChain.plugin(
@@ -208,4 +213,10 @@ function clear(webpackConfig, props) {
       webpackConfig[prop] = {};
     }
   });
+}
+
+class NoopPlugin {
+
+  apply() {}
+
 }

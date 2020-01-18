@@ -14,6 +14,7 @@ module.exports = function (command, options = {}) {
     require('./lib/plugins/parallel'),
     require('./lib/plugins/babel-plugins'),
     require('./lib/plugins/css'),
+    require('./lib/plugins/define'),
     require('./lib/plugins/extensions'),
     require('./lib/plugins/externals'),
     require('./lib/plugins/filename-hashing'),

@@ -21,7 +21,7 @@ module.exports = function (service, projectOptions) {
     if (isObject(progressBar)) {
       chain
         .plugin('progressBar')
-        .before('HtmlWebpackPlugin')
+        .after('noop')
         .use(new CliProgressPlugin(progressBar));
     }
   });

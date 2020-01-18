@@ -40,6 +40,7 @@ module.exports = {
       }
     }
   },
+  define: { instanceof: ['Function', 'Object'] },
   devServer: { instanceof: ['Function', 'Object'] },
   extensions: { instanceof: ['Function', 'Array'] },
   externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },
@@ -212,6 +213,28 @@ module.exports = {
         }
       }
     }
+  }
+}
+```
+
+* **define global constants**
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  define: {
+    __version__: JSON.stringify('1.0.0')
+  }
+}
+```
+
+```javascript
+/* riant.config.js */
+module.exports = {
+  define(chainedMap, env, service) {
+    return {
+      __version__: JSON.stringify('1.0.0')
+    };
   }
 }
 ```

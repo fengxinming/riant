@@ -1,7 +1,7 @@
 'use strict';
 
 const { existsSync } = require('fs');
-const { isAbsolute, relative } = require('path');
+const { isAbsolute, relative, join } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { isObject, isString, forOwn } = require('../utils');
 
@@ -30,6 +30,7 @@ module.exports = function (service, projectOptions) {
     // 方便查看依赖的全局配置参数
     const { pages } = projectOptions;
 
+    const { appPublic } = service.paths;
     const outputDir = service.paths.appBuild;
     const defaultTemplate = service.paths.appHtml;
 
@@ -43,7 +44,7 @@ module.exports = function (service, projectOptions) {
         const pageConfig = normalizePageConfig(page);
         const {
           entry,
-          template = `public/${name}.html`,
+          template = join(appPublic, `${name}.html`),
           filename = `${name}.html`,
           chunks = [name]
         } = pageConfig;
@@ -84,11 +85,11 @@ module.exports = function (service, projectOptions) {
 
         chain
           .plugin(`html-${name}`)
-          .before('HtmlWebpackPlugin')
+          .after('noop')
           .use(new HtmlWebpackPlugin(pageHtmlOptions));
       });
 
-      defaultHtmlOptions.chunks = ['main'];
+      chain.plugins.delete('HtmlWebpackPlugin');
 
       if (webpackEnv === 'development') {
         const filename = chain.output.get('filename');

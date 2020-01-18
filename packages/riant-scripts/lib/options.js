@@ -34,6 +34,7 @@ const compiledSchema = ajv.compile({
         }
       }
     },
+    define: { instanceof: ['Function', 'Object'] },
     devServer: { instanceof: ['Function', 'Object'] },
     extensions: { instanceof: ['Function', 'Array'] },
     externals: { instanceof: ['Function', 'Array', 'RegExp', 'Object'] },

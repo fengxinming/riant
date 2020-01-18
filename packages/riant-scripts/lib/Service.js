@@ -163,6 +163,11 @@ class Service {
     // 获取未处理的 webpack 配置
     // 合并 chain webpack 后的配置
     let config = merge(webpackConfig, chainableConfig.toConfig());
+    // 移除 noop 插件
+    if (config.plugins[0].__pluginName === 'noop') {
+      config.plugins.shift();
+    }
+
     this.webpackRawConfigFns.forEach((fn) => {
       if (isFunction(fn)) {
         const res = fn(config, env, this);

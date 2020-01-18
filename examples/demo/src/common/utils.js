@@ -1,5 +1,6 @@
 export function sayHi() {
-  console.info('sayHi');
+  // eslint-disable-next-line no-undef
+  console.info('sayHi', __version__);
 }
 
 export function sayHello() {
