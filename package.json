@@ -9,7 +9,8 @@
     "example:ra": "lerna run --scope riant-antd",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "node ./scripts/release",
-    "template": "node ./scripts/template"
+    "template": "node ./scripts/template",
+    "docs": "yarn run --cwd=./docs"
   },
   "author": "Jesse Feng",
   "license": "MIT",

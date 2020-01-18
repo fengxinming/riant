@@ -10,6 +10,7 @@
   "author": "Jesse Feng",
   "license": "ISC",
   "dependencies": {
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.2.0",
+    "vuepress-theme-purple": "^1.0.1"
   }
 }

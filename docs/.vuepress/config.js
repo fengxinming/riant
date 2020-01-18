@@ -14,15 +14,16 @@ module.exports = {
       description: '可配置化的React开发和构建工具'
     }
   },
+  theme: 'purple',
   themeConfig: {
-    logo: 'https://react-redux.js.org/img/redux_white.svg',
+    logo: '/logo.svg',
     repo: 'fengxinming/riant',
     smoothScroll: true,
     locales: {
       '/': {
         label: 'English',
         selectText: 'Languages',
-        ariaLabel: 'Language Menu',
+        ariaLabel: 'Language Menu'
         // nav: require('./nav/zh-CN'),
         // sidebar: require('./sidebar/zh-CN')
       },
@@ -30,8 +31,12 @@ module.exports = {
         label: '简体中文',
         selectText: '选择语言',
         ariaLabel: '语言菜单',
-        // nav: require('./nav/zh-CN'),
-        // sidebar: require('./sidebar/zh-CN')
+        nav: [
+          { text: '指南', link: '/zh/guide/' },
+          { text: '配置参考', link: '/zh/config/' }
+        ],
+        // sidebar: {
+        // }
       }
     }
   }

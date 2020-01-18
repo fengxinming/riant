@@ -28,7 +28,7 @@
     "cache-loader": "^4.1.0",
     "celia": "^6.1.4",
     "chalk": "^3.0.0",
-    "cli-progress-webpack-plugin": "^1.0.0",
+    "cli-progress-webpack-plugin": "^1.0.1",
     "clrsole": "^2.0.0",
     "lodash": "^4.17.15",
     "ora": "^4.0.3",

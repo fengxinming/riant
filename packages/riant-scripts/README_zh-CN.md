@@ -27,7 +27,6 @@ module.exports = {
   css: {
     type: 'object',
     properties: {
-      modules: { type: 'boolean' },
       sourceMap: { type: 'boolean' },
       loaderOptions: {
         type: 'object',

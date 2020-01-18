@@ -21,7 +21,6 @@ const compiledSchema = ajv.compile({
     css: {
       type: 'object',
       properties: {
-        modules: { type: 'boolean' },
         sourceMap: { type: 'boolean' },
         loaderOptions: {
           type: 'object',
@@ -56,7 +55,6 @@ exports.validate = function (resolved, cb) {
 
 exports.defaults = () => ({
   css: {
-    // modules: false,
     // sourceMap: false,
     // loaderOptions: {}
   },
