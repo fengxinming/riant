@@ -17,7 +17,7 @@ module.exports = {
   theme: 'purple',
   themeConfig: {
     logo: '/logo.svg',
-    repo: 'fengxinming/riant',
+    repo: 'react-hobby/riant',
     smoothScroll: true,
     locales: {
       '/': {
