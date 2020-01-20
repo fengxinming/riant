@@ -2,23 +2,23 @@
 sidebar: auto
 ---
 
-# 指南
+# Guide
 
-## 什么是 riant-scripts
+## Introduce riant-scripts
 
-`riant-scripts` 是基于 `react-scripts` 封装的一个 React 构建工具，适用于 `create-react-app` 创建的项目，在不使用 eject 命令的情况下，轻松扩展 webpack 配置。
+`riant-scripts` is a React build tool that base on `react-scripts` to be used for a React project，you can configure webpack easily without using 'eject' and without creating a fork of the react-scripts。
 
-## 在项目中使用 riant-scripts
+## How riant-scripts Works
 
-> 注：项目最好由 `create-react-app` 创建
+> PS：That is much better to create a project with `create-react-app`
 
-### 安装 riant-scripts
+### Install riant-scripts
 
 ```bash
 $ npm install riant-scripts --save-dev
 ```
 
-### 替换 package.json 中 scripts 命令
+### change npm scripts in package.json
 
 ```diff
   /* package.json */
@@ -33,11 +33,11 @@ $ npm install riant-scripts --save-dev
     "eject": "react-scripts eject"
 }
 ```
-注意：不用替换 `eject` 部分。工具中没有针对 `eject` 的配置替换，执行了 eject 命令会让工具失去作用。
+PS：Do not change `eject` script。That gets run only once for a project, after which you are given full control over the webpack configuration making riant-scripts no longer required. There are no configuration options to rewire for the eject script.
 
-### 在根目录中创建 riant.config.js
+### Create a riant.config.js file in the root directory
 
-* 代码结构
+* Code structure
 
 ```
 +-- your-project
@@ -86,23 +86,23 @@ module.exports = {
 }
 ```
 
-* 自定义 webpack 配置，具体参见[配置参考](/zh/config/)
+* Configure webpack，learn more[Config Reference](/config/)
 
-### 启动开发服务
+### Start the Dev Server
 
 ```bash
 $ npm start
 ```
 
-### 构建你的应用程序
+### Build your app
 
 ```bash
 $ npm run build
 ```
 
-## 使用模板创建项目
+## Create a project with a template
 
-### 下载模板
+### Download a template
 
 ```bash
 # npm 5.2+
@@ -113,14 +113,14 @@ npm init react-app my-app --template riant
 yarn create react-app my-app --template riant
 ```
 
-### 启动服务
+### Start the Dev Server
 
 ```bash
 cd my-app
 npm start
 ```
 
-### 模板列表
+### Template list
 
 | Template | Version | Docs | Usage |
 | ------- | ------- | ---- | ----------- |

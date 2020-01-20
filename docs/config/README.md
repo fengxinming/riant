@@ -2,13 +2,13 @@
 sidebar: auto
 ---
 
-# 配置参考
+# Config Reference
 
 ## riant.config.js
 
-`riant.config.js` 是一个可选的配置文件，如果项目的 (和 package.json 同级的) 根目录中存在这个文件，那么它会被 `riant-scripts` 自动加载。
+`riant.config.js` is an optional config file that will be automatically loaded by `riant-scripts`.
 
-这个文件应该导出一个包含了选项的对象：
+The file should export an object containing options:
 
 ```js
 // riant.config.js
@@ -23,7 +23,7 @@ module.exports = {
 
 * Default: undefined
 
-**配置别名**
+**Create aliases to import or require certain modules more easily**
 
 ```js
 module.exports = {
@@ -47,7 +47,7 @@ module.exports = {
 
 * Default: undefined
 
-**配置 babel 插件**
+**Add plugins to Babel**
 
 ```js
 module.exports = {
@@ -110,7 +110,7 @@ module.exports = {
 
 * Default: undefined
 
-**增加自定义配置**
+**Customize Webpack config**
 
 ```js
 module.exports = {
@@ -134,7 +134,7 @@ module.exports = {
 
 * Default: undefined
 
-**增加自定义配置**
+**Customize Webpack config**
 
 ```js
 module.exports = {
@@ -159,7 +159,7 @@ module.exports = {
 
 * Default: {}
 
-**配置 loader 参数**
+**Customize style loader options**
 
 ```js
 module.exports = {
@@ -181,7 +181,7 @@ module.exports = {
 
 * Default: undefined
 
-**定义全局常量**
+**define global constants**
 
 ```js
 module.exports = {
@@ -207,7 +207,7 @@ module.exports = {
 
 * Default: {}
 
-**配置本地开发服务**
+**Customize Dev Server config**
 
 ```js
 module.exports = {
@@ -241,7 +241,7 @@ module.exports = {
 
 * Default: undefined
 
-**查找文件的扩展名集合**
+**Attempt to resolve these extensions in order**
 
 ```js
 module.exports = {
@@ -263,7 +263,7 @@ module.exports = {
 
 * Default: undefined
 
-**导入外部扩展**
+**Prevent bundling of certain imported packages and instead retrieve these external dependencies at runtime**
 
 ```js
 module.exports = {
@@ -289,7 +289,7 @@ module.exports = {
 
 * Default: true
 
-**是否移除 hash 文件名**
+**Attempt to remove hash from filename**
 
 ```js
 module.exports = {
@@ -303,7 +303,7 @@ module.exports = {
 
 * Default: config => config
 
-**jest 配置**
+**Attempt to update jest config**
 
 ```js
 module.exports = {
@@ -319,7 +319,7 @@ module.exports = {
 
 * Default: undefined
 
-**配置多页支持**
+**multi-page setup**
 
 ```js
 module.exports = {
@@ -338,7 +338,7 @@ module.exports = {
 
 * Default: undefined
 
-**配置内置的 paths**
+**Attempt to update paths**
 
 ```js
 module.exports = {
@@ -362,7 +362,7 @@ module.exports = {
 
 * Default: false
 
-**为 Babel 或 TypeScript 使用 thread-loader，仅作用于生产构建**
+**use thread-loader for Babel or TypeScript transpilation**
 
 ```js
 module.exports = {
@@ -376,7 +376,7 @@ module.exports = {
 
 * Default: undefined
 
-**增加进度条**
+**Add progress bar**
 
 ```js
 module.exports = {
@@ -405,7 +405,7 @@ module.exports = {
 
 * Default: undefined
 
-**增加自定插件至 riant-scripts**
+**Add plugins to riant-scripts**
 
 ```js
 module.exports = {
@@ -417,7 +417,7 @@ module.exports = {
 }
 ```
 
-[插件参考](https://github.com/react-hobby/riant/tree/master/packages/riant-scripts/lib/plugins)
+[learn more](https://github.com/react-hobby/riant/tree/master/packages/riant-scripts/lib/plugins)
 
 ### useEslintrc
 
@@ -425,7 +425,7 @@ module.exports = {
 
 * Default: undefined
 
-**自定义 eslintrc 文件，扩展 eslint 规则**
+**Use eslintrc**
 
 ```js
 module.exports = {
@@ -433,9 +433,9 @@ module.exports = {
 }
 ```
 
-## 扩展 Webpack 配置
+## Extended Webpack Configuration
 
-### 兼容 ie9
+### Supporting Internet Explorer 9
 
 ```javascript
 /* riant.config.js */
@@ -450,7 +450,7 @@ module.exports = {
 }
 ```
 
-### 移除 console.log
+### Without console.log
 
 ```javascript
 /* riant.config.js */
@@ -467,7 +467,7 @@ module.exports = {
 }
 ```
 
-### 代码拆分
+### Code splitting
 
 ```javascript
 /* riant.config.js */
@@ -496,17 +496,16 @@ module.exports = {
 }
 ```
 
-### 设置打包配置
+### Set env for production 
 
-**在根目录中创建一个 .env.production 文件**
+**Create .env.production file in the root directory**
 
 ```env
-# 是否生成 .map 文件
+# Source maps are resource heavy and can cause out of memory issue for large source files.
 GENERATE_SOURCEMAP=false
 
-# 是否把 runtime chunk 生成到 html 模板中
+# Some apps do not need the benefits of saving a web request, so not inlining the chunk makes for a smoother build process.
 INLINE_RUNTIME_CHUNK=false
 
-# 编码图片的大小限制
 IMAGE_INLINE_SIZE_LIMIT=30000
 ```

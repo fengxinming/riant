@@ -23,9 +23,11 @@ module.exports = {
       '/': {
         label: 'English',
         selectText: 'Languages',
-        ariaLabel: 'Language Menu'
-        // nav: require('./nav/zh-CN'),
-        // sidebar: require('./sidebar/zh-CN')
+        ariaLabel: 'Language Menu',
+        nav: [
+          { text: 'Guide', link: '/guide/' },
+          { text: 'Config Reference', link: '/config/' }
+        ],
       },
       '/zh/': {
         label: '简体中文',

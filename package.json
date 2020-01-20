@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "node ./scripts/release",
     "template": "node ./scripts/template",
-    "docs": "yarn run --cwd=./docs"
+    "docs": "yarn run --cwd=./docs",
+    "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages"
   },
   "author": "Jesse Feng",
   "license": "MIT",
