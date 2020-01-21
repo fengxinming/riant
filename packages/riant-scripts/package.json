@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-hobby/riant.git",
+    "url": "git+https://github.com/fengxinming/riant.git",
     "directory": "packages/riant-scripts"
   },
   "keywords": [
@@ -16,9 +16,9 @@
   "author": "Jesse Feng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/react-hobby/riant/issues"
+    "url": "https://github.com/fengxinming/riant/issues"
   },
-  "homepage": "https://github.com/react-hobby/riant#readme",
+  "homepage": "https://github.com/fengxinming/riant#readme",
   "peerDependencies": {
     "react-scripts": ">=2.1.3"
   },

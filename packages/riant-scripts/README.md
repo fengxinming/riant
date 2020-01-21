@@ -7,8 +7,8 @@
 [![NPM version](https://img.shields.io/npm/v/riant-scripts.svg?style=flat)](https://npmjs.org/package/riant-scripts)
 [![NPM Downloads](https://img.shields.io/npm/dm/riant-scripts.svg?style=flat)](https://npmjs.org/package/riant-scripts)
 
-## [English Documentation](https://react-hobby.github.io/riant/)
-## [中文文档](https://react-hobby.github.io/riant/zh/)
+## [English Documentation](https://fengxinming.github.io/riant/)
+## [中文文档](https://fengxinming.github.io/riant/zh/)
 
 ## Install riant-scripts
 

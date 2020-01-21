@@ -417,7 +417,7 @@ module.exports = {
 }
 ```
 
-[插件参考](https://github.com/react-hobby/riant/tree/master/packages/riant-scripts/lib/plugins)
+[插件参考](https://github.com/fengxinming/riant/tree/master/packages/riant-scripts/lib/plugins)
 
 ### useEslintrc
 
@@ -496,7 +496,7 @@ module.exports = {
 }
 ```
 
-### 设置打包配置
+### 修改打包配置
 
 **在根目录中创建一个 .env.production 文件**
 

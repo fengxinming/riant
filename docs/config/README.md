@@ -417,7 +417,7 @@ module.exports = {
 }
 ```
 
-[learn more](https://github.com/react-hobby/riant/tree/master/packages/riant-scripts/lib/plugins)
+[learn more](https://github.com/fengxinming/riant/tree/master/packages/riant-scripts/lib/plugins)
 
 ### useEslintrc
 
@@ -433,9 +433,11 @@ module.exports = {
 }
 ```
 
-## Extended Webpack Configuration
+## Webpack
 
-### Supporting Internet Explorer 9
+### Extended Webpack Configuration
+
+#### Supporting Internet Explorer 9
 
 ```javascript
 /* riant.config.js */
@@ -450,7 +452,7 @@ module.exports = {
 }
 ```
 
-### Without console.log
+#### Without console.log
 
 ```javascript
 /* riant.config.js */
@@ -467,7 +469,7 @@ module.exports = {
 }
 ```
 
-### Code splitting
+#### Code splitting
 
 ```javascript
 /* riant.config.js */
@@ -496,9 +498,9 @@ module.exports = {
 }
 ```
 
-### Set env for production 
+#### Change for building
 
-**Create .env.production file in the root directory**
+Create .env.production file in the root directory
 
 ```env
 # Source maps are resource heavy and can cause out of memory issue for large source files.

@@ -9,7 +9,7 @@
     "examples/*"
   ],
   "changelog": {
-    "repo": "react-hobby/riant",
+    "repo": "fengxinming/riant",
     "cacheDir": ".changelog",
     "labels": {
       "PR: Spec Compliance :eyeglasses:": ":eyeglasses: Spec Compliance",

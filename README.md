@@ -1,6 +1,9 @@
 # riant
 Highly configurable development and build tools for react.
 
+## [English Documentation](https://fengxinming.github.io/riant/)
+## [中文文档](https://fengxinming.github.io/riant/zh/)
+
 ---
 
 ## Creating an App
@@ -41,4 +44,4 @@ npm start
 
 ## Extended Webpack Configuration
 
-[Documentation](packages/riant-scripts/README.md#Extended-Webpack-Configuration)
+[Documentation](https://fengxinming.github.io/riant/config/#extended-webpack-configuration)

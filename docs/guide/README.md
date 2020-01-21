@@ -4,21 +4,25 @@ sidebar: auto
 
 # Guide
 
-## Introduce riant-scripts
+## riant-scripts
+
+### Introduction
 
 `riant-scripts` is a React build tool that base on `react-scripts` to be used for a React project，you can configure webpack easily without using 'eject' and without creating a fork of the react-scripts。
 
-## How riant-scripts Works
+### How it works
 
 > PS：That is much better to create a project with `create-react-app`
 
-### Install riant-scripts
+#### Installation
 
 ```bash
 $ npm install riant-scripts --save-dev
 ```
 
-### change npm scripts in package.json
+#### Change package.json
+
+Change npm scripts in package.json
 
 ```diff
   /* package.json */
@@ -35,7 +39,9 @@ $ npm install riant-scripts --save-dev
 ```
 PS：Do not change `eject` script。That gets run only once for a project, after which you are given full control over the webpack configuration making riant-scripts no longer required. There are no configuration options to rewire for the eject script.
 
-### Create a riant.config.js file in the root directory
+#### Create riant.config.js
+
+Create a riant.config.js file in the root directory
 
 * Code structure
 
@@ -86,23 +92,25 @@ module.exports = {
 }
 ```
 
-* Configure webpack，learn more[Config Reference](/config/)
+* Configure webpack，learn more [Config Reference](/config/)
 
-### Start the Dev Server
+#### Start the Dev Server
 
 ```bash
 $ npm start
 ```
 
-### Build your app
+#### Build your App
 
 ```bash
 $ npm run build
 ```
 
-## Create a project with a template
+## Template
 
-### Download a template
+### Create project
+
+#### Create a project with a template
 
 ```bash
 # npm 5.2+
@@ -113,14 +121,14 @@ npm init react-app my-app --template riant
 yarn create react-app my-app --template riant
 ```
 
-### Start the Dev Server
+#### Start the Dev Server
 
 ```bash
 cd my-app
 npm start
 ```
 
-### Template list
+### Templates
 
 | Template | Version | Docs | Usage |
 | ------- | ------- | ---- | ----------- |
