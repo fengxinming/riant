@@ -1,8 +1,8 @@
 # riant
 Highly configurable development and build tools for react.
 
-## [English Documentation](https://fengxinming.github.io/riant/)
-## [中文文档](https://fengxinming.github.io/riant/zh/)
+## [English Documentation](https://react-hobby.github.io/riant/)
+## [中文文档](https://react-hobby.github.io/riant/zh/)
 
 ---
 
