@@ -4,7 +4,7 @@ const cac = require('cac');
 const logger = require('../lib/logger');
 const pkg = require('../package.json');
 
-const cli = cac(pkg.name.replace(/@ali\//g, ''));
+const cli = cac(pkg.name);
 
 // 支持 -v -h 可选项提示
 cli
