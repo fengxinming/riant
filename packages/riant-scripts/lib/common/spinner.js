@@ -16,9 +16,9 @@ exports.logWithSpinner = (symbol, msg) => {
       text: lastMsg.text
     });
   }
-  spinner.text = ' ' + msg;
+  spinner.text = ` ${msg}`;
   lastMsg = {
-    symbol: symbol + ' ',
+    symbol: `${symbol} `,
     text: msg
   };
   spinner.start();
@@ -30,7 +30,8 @@ exports.stopSpinner = (persist) => {
       symbol: lastMsg.symbol,
       text: lastMsg.text
     });
-  } else {
+  }
+  else {
     spinner.stop();
   }
   lastMsg = null;

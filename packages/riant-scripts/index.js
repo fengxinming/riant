@@ -2,7 +2,7 @@
 
 const { EOL } = require('os');
 const Service = require('./lib/Service');
-const { logWithSpinner, stopSpinner } = require('./lib/spinner');
+const { logWithSpinner, stopSpinner } = require('./lib/common/spinner');
 const pkg = require('./package.json');
 
 module.exports = function (command, options = {}) {

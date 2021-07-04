@@ -1,7 +1,6 @@
 'use strict';
 
-const { isObject } = require('./utils');
-const { isArray } = Array;
+const { isObject, isArray } = require('./common/util');
 
 /**
  * 便于操作配置规则
@@ -74,7 +73,8 @@ function chainModule(chainableModule, moduleConfig) {
     const ruleName = getRuleName(ruleConfig);
     if (ruleName) {
       mergeRule(chainableModule.rule(ruleName), ruleConfig);
-    } else if (ruleConfig.oneOf) {
+    }
+    else if (ruleConfig.oneOf) {
       const chainableMainRule = chainableModule.rule('main');
       ruleConfig.oneOf.forEach((childRuleConfig, j) => {
         const childRuleName = getRuleName(childRuleConfig);
@@ -111,7 +111,8 @@ function chainModule(chainableModule, moduleConfig) {
             );
         }
       });
-    } else {
+    }
+    else {
       mergeRule(chainableModule.rule(i), ruleConfig);
     }
   });
@@ -126,7 +127,7 @@ function chainPlugins(webpackChain, pluginConfig) {
   // 用于挂在插件到首个
   webpackChain
     .plugin('noop')
-    .use(new NoopPlugin());
+    .use(NoopPlugin);
 
   pluginConfig.forEach((n, i) => {
     const { name } = n.constructor;
@@ -153,8 +154,8 @@ function mergeRule(chainableRule, ruleConfig) {
   add(chainableRule.exclude, ruleConfig.exclude);
   add(chainableRule.include, ruleConfig.include);
   ruleConfig.test && chainableRule.test(ruleConfig.test);
-  ruleConfig.use &&
-    ruleConfig.use.forEach(loaderConfig =>
+  ruleConfig.use
+    && ruleConfig.use.forEach((loaderConfig) =>
       chainableRule
         .use(getLoaderName(loaderConfig))[isObject(loaderConfig) ? 'merge' : 'loader'](loaderConfig)
     );
@@ -175,7 +176,8 @@ function normalizeRule(chainableRule, ruleConfig) {
     add(chainableRule.exclude, ruleConfig.exclude);
     add(chainableRule.include, ruleConfig.include);
     ruleConfig.test && chainableRule.test(ruleConfig.test);
-  } else {
+  }
+  else {
     mergeRule(chainableRule, ruleConfig);
   }
 }
@@ -190,7 +192,7 @@ function add(chainableSet, item) {
     if (!isArray(item)) {
       item = [item];
     }
-    item.forEach(n => chainableSet.add(n));
+    item.forEach((n) => chainableSet.add(n));
   }
 }
 
@@ -206,17 +208,17 @@ function nextName(chainableMap, name) {
 
 function clear(webpackConfig, props) {
   props.forEach((prop) => {
-    const val = webpackConfig[prop] = [];
+    const val = [];
+    webpackConfig[prop] = val;
     if (isArray(val)) {
       webpackConfig[prop] = [];
-    } else if (isObject(val)) {
+    }
+    else if (isObject(val)) {
       webpackConfig[prop] = {};
     }
   });
 }
 
-class NoopPlugin {
-
-  apply() {}
-
+function NoopPlugin() {
+  // empty
 }

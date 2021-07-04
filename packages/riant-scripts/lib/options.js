@@ -7,6 +7,7 @@ const ajv = new Ajv({
   verbose: true,
   $data: true
 });
+require('ajv-errors')(ajv /* , {singleError: true} */);
 require('ajv-keywords')(ajv, ['instanceof', 'typeof']);
 
 const compiledSchema = ajv.compile({
@@ -43,14 +44,14 @@ const compiledSchema = ajv.compile({
     parallel: { type: ['boolean', 'number'] },
     paths: { instanceof: ['Function', 'Object'] },
     progressBar: { type: ['boolean', 'object'] },
-    riantPlugins: { instanceof: 'Array' },
+    webpackPlugins: { instanceof: 'Array' },
     useEslintrc: { type: 'boolean' }
   }
 });
 
 exports.validate = function (resolved, cb) {
   const valid = compiledSchema(resolved);
-  !valid && cb && cb(filterErrors(compiledSchema.errors));
+  !valid && cb && cb(compiledSchema.errors);
 };
 
 exports.defaults = () => ({
@@ -79,36 +80,3 @@ exports.defaults = () => ({
 
   parallel: false // 默认关闭 thread-loader
 });
-
-function filterErrors(errors) {
-  let newErrors = [];
-
-  for (const error of errors) {
-    const { dataPath } = error;
-    let children = [];
-
-    newErrors = newErrors.filter((oldError) => {
-      if (oldError.dataPath.includes(dataPath)) {
-        if (oldError.children) {
-          children = children.concat(oldError.children.slice(0));
-        }
-
-        // eslint-disable-next-line no-undefined, no-param-reassign
-        oldError.children = undefined;
-        children.push(oldError);
-
-        return false;
-      }
-
-      return true;
-    });
-
-    if (children.length) {
-      error.children = children;
-    }
-
-    newErrors.push(error);
-  }
-
-  return newErrors;
-}

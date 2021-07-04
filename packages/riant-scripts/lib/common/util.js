@@ -10,3 +10,6 @@ exports.defaultsDeep = require('lodash/defaultsDeep');
 exports.getLogger = function (name, options) {
   return getLogger(`${pkg.name}.${name}`, options);
 };
+
+exports.isArray = Array.isArray;
+exports.stringifyJSON = JSON.stringify;

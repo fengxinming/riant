@@ -7,13 +7,12 @@ const chalk = require('chalk');
 const Config = require('webpack-chain');
 const merge = require('webpack-merge');
 const semver = require('semver');
-const { defaultsDeep, isFunction, isObject, isUndefined, isString, getLogger } = require('./utils');
+const { defaultsDeep, isFunction, isObject, isUndefined, isString, getLogger } = require('./common/util');
 const { defaults, validate } = require('./options');
 const initChain = require('./init-chain');
+const { isArray, stringify } = require('./common/util');
 
 const logger = getLogger('Service');
-const { isArray } = Array;
-const { stringify } = JSON;
 
 class Service {
 
@@ -46,7 +45,7 @@ class Service {
       if (isArray(this.projectOptions.riantPlugins)) {
         plugins = plugins.concat(this.projectOptions.riantPlugins);
       }
-      plugins.forEach(plugin => plugin(this, this.projectOptions));
+      plugins.forEach((plugin) => plugin(this, this.projectOptions));
     }
 
     const scriptPkg = require(`${reactScriptVersion}/package.json`);
@@ -58,9 +57,10 @@ class Service {
     if (isWebpackFactory) {
       const webpackConfigPath = `${reactScriptVersion}/config/webpack.config`;
       const webpackConfig = require(webpackConfigPath);
-      require.cache[require.resolve(webpackConfigPath)].exports =
-        env => this.webpack(webpackConfig(env), env);
-    } else {
+      require.cache[require.resolve(webpackConfigPath)].exports
+        = (env) => this.webpack(webpackConfig(env), env);
+    }
+    else {
       let configSuffix = '';
       switch (process.env.NODE_ENV) {
         case 'development':
@@ -71,20 +71,23 @@ class Service {
           break;
       }
       const webpackConfigPath = `${reactScriptVersion}/config/webpack.config${configSuffix}`;
-      require.cache[require.resolve(webpackConfigPath)].exports = this.webpack(require(webpackConfigPath), process.env.NODE_ENV);
+      require.cache[require.resolve(webpackConfigPath)].exports
+        = this.webpack(require(webpackConfigPath), process.env.NODE_ENV);
     }
 
     // 开发环境下加载 devServer 配置
     if (process.env.NODE_ENV === 'development') {
       const devServerConfigPath = `${reactScriptVersion}/config/webpackDevServer.config.js`;
       const devServerConfig = require(devServerConfigPath);
-      require.cache[require.resolve(devServerConfigPath)].exports = this.devServer(devServerConfig, process.env.NODE_ENV);
+      require.cache[require.resolve(devServerConfigPath)].exports
+        = this.devServer(devServerConfig, process.env.NODE_ENV);
     }
   }
 
   loadUserOptions() {
     // riant.config.js
-    let fileConfig, resolved;
+    let fileConfig;
+    let resolved;
     const { configPath, configFile, reactScriptVersion } = this;
     let resolvedFrom = configFile;
 
@@ -105,7 +108,8 @@ class Service {
           );
           fileConfig = null;
         }
-      } catch (e) {
+      }
+      catch (e) {
         logger.error(`Error loading ${chalk.bold(resolvedFrom)}:`);
         throw e;
       }
@@ -113,7 +117,8 @@ class Service {
 
     if (fileConfig) {
       resolved = fileConfig;
-    } else {
+    }
+    else {
       resolved = this.inlineOptions || {};
       resolvedFrom = 'inline options';
     }
@@ -122,13 +127,14 @@ class Service {
     if (cssOptions && !isUndefined(cssOptions.modules)) {
       if (!isUndefined(cssOptions.requireModuleExtension)) {
         logger.warn(
-          `You have set both "css.modules" and "css.requireModuleExtension" in ${chalk.bold(resolvedFrom)}, ` +
-          '"css.modules" will be ignored in favor of "css.requireModuleExtension".'
+          `You have set both "css.modules" and "css.requireModuleExtension" in ${chalk.bold(resolvedFrom)}, `
+          + '"css.modules" will be ignored in favor of "css.requireModuleExtension".'
         );
-      } else {
+      }
+      else {
         logger.warn(
-          `"css.modules" option in ${chalk.bold(resolvedFrom)} ` +
-          'is deprecated now, please use "css.requireModuleExtension" instead.'
+          `"css.modules" option in ${chalk.bold(resolvedFrom)} `
+          + 'is deprecated now, please use "css.requireModuleExtension" instead.'
         );
         cssOptions.requireModuleExtension = !cssOptions.modules;
       }
@@ -143,7 +149,9 @@ class Service {
 
     // 验证参数
     validate(resolved, (err) => {
-      logger.error(`Invalid options in ${chalk.bold(resolvedFrom)}:${EOL}${err.map(e => stringify(e, null, 2)).join(EOL)}`);
+      logger.error(
+        `Invalid options in ${chalk.bold(resolvedFrom)}:${EOL}${err.map((e) => stringify(e, null, 2)).join(EOL)}`
+      );
       process.exit(1);
     });
 
@@ -158,7 +166,7 @@ class Service {
     initChain(chainableConfig, webpackConfig);
 
     // 优先执行链式回调
-    this.webpackChainFns.forEach(fn => fn(chainableConfig, env, this));
+    this.webpackChainFns.forEach((fn) => fn(chainableConfig, env, this));
 
     // 获取未处理的 webpack 配置
     // 合并 chain webpack 后的配置
@@ -174,7 +182,8 @@ class Service {
         if (res) {
           config = merge(config, res);
         }
-      } else if (fn) {
+      }
+      else if (fn) {
         config = merge(config, fn);
       }
     });
@@ -192,7 +201,8 @@ class Service {
           if (res) {
             config = merge(config, res);
           }
-        } else if (fn) {
+        }
+        else if (fn) {
           config = merge(config, fn);
         }
       });
@@ -222,12 +232,7 @@ class Service {
   }
 
   findExisting(files) {
-    const { contextPath } = this;
-    return files.find((file) => {
-      if (existsSync(join(contextPath, file))) {
-        return true;
-      }
-    });
+    return findExisting(files, this.contextPath);
   }
 
   get paths() {
@@ -258,4 +263,10 @@ function removeSlash(config, key) {
   if (isString(val)) {
     config[key] = val.replace(/\/$/g, '');
   }
+}
+
+function findExisting(files, contextPath) {
+  return files.find((file) => {
+    return existsSync(join(contextPath, file));
+  });
 }
