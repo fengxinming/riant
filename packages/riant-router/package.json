@@ -1,0 +1,38 @@
+{
+  "name": "riant-router",
+  "version": "1.0.0",
+  "description": "Static route configuration and hooks for React Router.",
+  "main": "index.js",
+  "module": "es/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "eslint": "eslint --fix --ext .js,.jsx ./",
+    "test": "jest --config jest.config.js"
+  },
+  "keywords": [
+    "react-router"
+  ],
+  "author": "Jesse Feng <fxm0016@126.com>",
+  "license": "MIT",
+  "dependencies": {
+    "celia": "^8.0.2",
+    "react-route-guard": "^1.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-router": "^4 || ^5",
+    "history": "^4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
+    "babel-jest": "^27.0.4",
+    "jest": "^27.0.4",
+    "rollup": "^2.38.0",
+    "rollup-plugin-combine": "^2.0.1",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-empty": "^1.0.0",
+    "rollup-plugin-match": "^1.0.0",
+    "rollup-plugin-replace-imports": "^1.0.0"
+  }
+}
