@@ -1,5 +1,6 @@
 import callHook from 'celia/es/callHook';
 import runQueue from 'celia/es/runQueue';
+import objectWithoutProperties from '@ali/iot-cloud-util/es/objectWithoutProperties';
 import { createHashHistory, createBrowserHistory, createMemoryHistory } from 'history';
 import { supportsPushState } from '../util/shared';
 
@@ -31,7 +32,8 @@ export function createHistoryBy(mode, historyOptions) {
  * @returns {History}
  */
 export function createHistory(config, ctx) {
-  const { mode, ...historyOptions } = config;
+  const { mode } = config;
+  const historyOptions = objectWithoutProperties(config, ['mode']);
 
   let historyMode = mode;
   if (historyMode === 'history' && !supportsPushState) {
